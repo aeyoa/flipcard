@@ -1,5 +1,8 @@
+import com.google.gson.Gson;
 import processing.core.PApplet;
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,6 +14,7 @@ public class Rotation3D extends PApplet {
     private Card focusCard;
     private int focusIndex;
     private List<Card> cards;
+    private Gson gson;
 
     @Override
     public void setup() {
@@ -19,6 +23,8 @@ public class Rotation3D extends PApplet {
         noStroke();
         fill(255);
         rectMode(CENTER);
+
+        gson = new Gson();
 
         /* Creating collection of cards. */
         cards = new ArrayList<>();
@@ -49,9 +55,6 @@ public class Rotation3D extends PApplet {
     public void mouseClicked() {
         super.mouseClicked();
         focusCard.turn();
-        for (Card card : cards) {
-            System.out.println(card);
-        }
     }
 
     @Override
@@ -59,17 +62,27 @@ public class Rotation3D extends PApplet {
         super.keyPressed();
         if (key == CODED) {
             if (keyCode == RIGHT) {
-                for (Card card : cards) {
-                    card.moveLeft();
+                if (focusIndex < cards.size() - 1) {
+                    for (Card card : cards) {
+                        card.moveLeft();
+                    }
+                    focusCard = cards.get(++focusIndex);
                 }
-                focusCard = cards.get(++focusIndex);
             } else if (keyCode == LEFT) {
-                for (Card card : cards) {
-                    card.moveRight();
+                if (focusIndex > 0) {
+                    for (Card card : cards) {
+                        card.moveRight();
+                    }
+                    focusCard = cards.get(--focusIndex);
                 }
-                focusCard = cards.get(--focusIndex);
             } else if (keyCode == UP) {
                 focusCard.turn();
+            } else if (keyCode == SHIFT) {
+                try {
+                    gson.toJson(cards.get(0), new FileWriter("cards.json"));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         }
     }
