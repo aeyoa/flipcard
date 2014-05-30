@@ -6,20 +6,20 @@ import processing.core.PApplet;
 public class Card {
 
 
-    private int TEXT_COLOR;
-    private int CARD_COLOR;
-    private int CARD_WIDTH = 400;
-    private int CARD_HEIGHT = 200;
-    private float EASING = 0.1f;
-    private int STEP = 550;
-    private float STEP_EASING = 0.2f;
+    private transient int TEXT_COLOR;
+    private transient int CARD_COLOR;
+    private transient int CARD_WIDTH = 400;
+    private transient int CARD_HEIGHT = 200;
+    private transient float EASING = 0.1f;
+    private transient int STEP = 550;
+    private transient float STEP_EASING = 0.2f;
 
-    private final PApplet p;
-    private float angle;
-    private float targetAngle;
-    private int xPos = 400;
-    private int yPos = 200;
-    private int xPosTarget;
+    private transient final PApplet p;
+    private transient float angle;
+    private transient float targetAngle;
+    private transient int xPos = 400;
+    private transient int yPos = 200;
+    private transient int xPosTarget;
 
     /* Words on card sides. */
     private String sideA = "hello";

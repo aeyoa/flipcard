@@ -1,6 +1,8 @@
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import processing.core.PApplet;
 
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -24,7 +26,7 @@ public class Rotation3D extends PApplet {
         fill(255);
         rectMode(CENTER);
 
-        gson = new Gson();
+        gson = new GsonBuilder().create();
 
         /* Creating collection of cards. */
         cards = new ArrayList<>();
@@ -79,7 +81,9 @@ public class Rotation3D extends PApplet {
                 focusCard.turn();
             } else if (keyCode == SHIFT) {
                 try {
-                    gson.toJson(cards.get(0), new FileWriter("cards.json"));
+                    final FileWriter fw = new FileWriter("cards.json");
+                    gson.toJson(cards, fw);
+                    fw.close();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
