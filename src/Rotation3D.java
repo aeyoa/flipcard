@@ -1,8 +1,11 @@
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import processing.core.PApplet;
+import sojamo.drop.DropEvent;
+import sojamo.drop.DropListener;
+import sojamo.drop.SDrop;
+import sun.java2d.pipe.SpanIterator;
 
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -17,6 +20,7 @@ public class Rotation3D extends PApplet {
     private int focusIndex;
     private List<Card> cards;
     private Gson gson;
+    private SDrop drop;
 
     @Override
     public void setup() {
@@ -27,6 +31,13 @@ public class Rotation3D extends PApplet {
         rectMode(CENTER);
 
         gson = new GsonBuilder().create();
+        drop = new SDrop(this);
+        drop.addDropListener(new DropListener() {
+            @Override
+            public void dropEvent(final DropEvent dropEvent) {
+                System.out.println(dropEvent.toString());
+            }
+        });
 
         /* Creating collection of cards. */
         cards = new ArrayList<>();
@@ -90,4 +101,6 @@ public class Rotation3D extends PApplet {
             }
         }
     }
+
+
 }
