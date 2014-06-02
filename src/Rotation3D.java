@@ -6,6 +6,8 @@ import sojamo.drop.DropListener;
 import sojamo.drop.SDrop;
 import sun.java2d.pipe.SpanIterator;
 
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -33,15 +35,29 @@ public class Rotation3D extends PApplet {
         gson = new GsonBuilder().create();
         drop = new SDrop(this);
         drop.addDropListener(new DropListener() {
+
+            {
+                setTargetRect(0,0, width, height );
+            }
+
             @Override
             public void dropEvent(final DropEvent dropEvent) {
-                System.out.println(dropEvent.toString());
+                try {
+                    loadFromJSON(dropEvent.toString());
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void dropEnter() {
+                System.out.println("hello");
             }
         });
 
         /* Creating collection of cards. */
         cards = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 1; i++) {
             final Card newCard = new Card(this);
             for (int j = 0; j < i; j++) {
                 newCard.moveRight();
@@ -100,6 +116,11 @@ public class Rotation3D extends PApplet {
                 }
             }
         }
+    }
+
+    private void loadFromJSON(final String filename) throws FileNotFoundException {
+        final FileReader fr = new FileReader(filename);
+        cards = gson.fromJson(fr, List.class);
     }
 
 
