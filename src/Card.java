@@ -22,8 +22,10 @@ public class Card {
     private transient int xPosTarget;
 
     /* Words on card sides. */
-    private String sideA = "hello";
-    private String sideB = "привет";
+    private String sideA = "";
+    private String sideB = "";
+    /* sideA = false, sideB = true. */
+    private Boolean side;
 
     public Card(final PApplet p) {
         this.p = p;
@@ -33,6 +35,7 @@ public class Card {
         this.angle = 0;
         this.targetAngle = 0;
         this.xPosTarget = xPos;
+        this.side = false;
     }
 
     public void display() {
@@ -72,6 +75,7 @@ public class Card {
 
     public void turn() {
         targetAngle += p.PI;
+        side = !side;
     }
 
     public void moveRight() {
@@ -81,6 +85,35 @@ public class Card {
     public void moveLeft() {
         xPosTarget -= STEP;
     }
+
+    public String getSideB() {
+        return sideB;
+    }
+
+    public String getSideA() {
+        return sideA;
+    }
+
+    public void setSideB(final String sideB) {
+        this.sideB = sideB;
+    }
+
+    public void setSideA(final String sideA) {
+        this.sideA = sideA;
+    }
+
+    public String getCurrentSide() {
+        return (side) ? sideB : sideA;
+    }
+
+    public void setCurrentSide(final String text) {
+        if (this.side) {
+            this.sideB = text;
+        } else {
+            this.sideA = text;
+        }
+    }
+
 
     @Override
     public String toString() {

@@ -4,7 +4,6 @@ import processing.core.PApplet;
 import sojamo.drop.DropEvent;
 import sojamo.drop.DropListener;
 import sojamo.drop.SDrop;
-import sun.java2d.pipe.SpanIterator;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -37,7 +36,7 @@ public class Rotation3D extends PApplet {
         drop.addDropListener(new DropListener() {
 
             {
-                setTargetRect(0,0, width, height );
+                setTargetRect(0, 0, width, height);
             }
 
             @Override
@@ -114,6 +113,31 @@ public class Rotation3D extends PApplet {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
+            }
+        }
+    }
+
+    @Override
+    public void keyReleased() {
+        if (key != CODED) {
+            switch (key) {
+                case BACKSPACE:
+                    focusCard.setCurrentSide(focusCard.getCurrentSide().substring(0, max(0, focusCard.getCurrentSide().length() - 1)));
+                    break;
+                case TAB:
+                    focusCard.setCurrentSide(focusCard.getCurrentSide() + "    ");
+                    break;
+                case ENTER:
+                case RETURN:
+                    // comment out the following two lines to disable line-breaks
+//                    focusCard.setCurrentSide(focusCard.getCurrentSide() + "\n");
+//                    break;
+                    focusCard.turn();
+                case ESC:
+                case DELETE:
+                    break;
+                default:
+                    focusCard.setCurrentSide(focusCard.getCurrentSide() + key);
             }
         }
     }
