@@ -1,6 +1,7 @@
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import processing.core.PApplet;
+import processing.core.PImage;
 import sojamo.drop.DropEvent;
 import sojamo.drop.DropListener;
 import sojamo.drop.SDrop;
@@ -22,6 +23,7 @@ public class Rotation3D extends PApplet {
     private List<Card> cards;
     private Gson gson;
     private SDrop drop;
+    private PImage icon;
 
     @Override
     public void setup() {
@@ -53,6 +55,7 @@ public class Rotation3D extends PApplet {
                 System.out.println("hello");
             }
         });
+        icon = loadImage("icon.png");
 
         /* Creating collection of cards. */
         cards = new ArrayList<>();
@@ -77,6 +80,7 @@ public class Rotation3D extends PApplet {
         for (Card card : cards) {
             card.display();
         }
+        image(icon, 10, 10);
     }
 
     @Override
