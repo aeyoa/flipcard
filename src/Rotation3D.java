@@ -59,7 +59,7 @@ public class Rotation3D extends PApplet {
 
         /* Creating collection of cards. */
         cards = new ArrayList<>();
-        for (int i = 0; i < 1; i++) {
+        for (int i = 0; i < 10; i++) {
             final Card newCard = new Card(this);
             for (int j = 0; j < i; j++) {
                 newCard.moveRight();
