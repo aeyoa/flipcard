@@ -24,6 +24,7 @@ public class Rotation3D extends PApplet {
     private Gson gson;
     private SDrop drop;
     private PImage icon;
+    private Button button;
 
     @Override
     public void setup() {
@@ -56,6 +57,7 @@ public class Rotation3D extends PApplet {
             }
         });
         icon = loadImage("icon.png");
+        button = new Button(this, icon, 10, 10);
 
         /* Creating collection of cards. */
         cards = new ArrayList<>();
@@ -80,15 +82,15 @@ public class Rotation3D extends PApplet {
         for (Card card : cards) {
             card.display();
         }
-        image(icon, 10, 10);
+        button.display();
     }
 
     @Override
     public void mouseClicked() {
         super.mouseClicked();
         focusCard.turn();
+        button.isPressed();
     }
-
     @Override
     public void keyPressed() {
         super.keyPressed();
