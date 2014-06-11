@@ -31,7 +31,7 @@ public class Card {
         this.p = p;
             /* Initialize colors. */
         this.TEXT_COLOR = p.color(20);
-        this.CARD_COLOR = p.color(253, 231, 251);
+        this.CARD_COLOR = p.color(255, 255, 255);
         this.angle = 0;
         this.targetAngle = 0;
         this.xPosTarget = xPos;
@@ -54,6 +54,8 @@ public class Card {
             /* Smoothing rotation angle. */
         if ((targetAngle - angle) > .01) {
             angle += (targetAngle - angle) * EASING;
+        } else {
+            angle = targetAngle;
         }
         p.rotateY(angle);
         p.rectMode(p.CENTER);
@@ -84,22 +86,6 @@ public class Card {
 
     public void moveLeft() {
         xPosTarget -= STEP;
-    }
-
-    public String getSideB() {
-        return sideB;
-    }
-
-    public String getSideA() {
-        return sideA;
-    }
-
-    public void setSideB(final String sideB) {
-        this.sideB = sideB;
-    }
-
-    public void setSideA(final String sideA) {
-        this.sideA = sideA;
     }
 
     public String getCurrentSide() {

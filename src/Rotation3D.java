@@ -5,12 +5,14 @@ import processing.core.PImage;
 import sojamo.drop.DropEvent;
 import sojamo.drop.DropListener;
 import sojamo.drop.SDrop;
+import sun.text.resources.FormatData_in;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -23,7 +25,7 @@ public class Rotation3D extends PApplet {
     private List<Card> cards;
     private Gson gson;
     private SDrop drop;
-    private PImage icon;
+    private PImage addIcon;
     private Button button;
 
     @Override
@@ -56,8 +58,8 @@ public class Rotation3D extends PApplet {
                 System.out.println("hello");
             }
         });
-        icon = loadImage("icon.png");
-        button = new Button(this, icon, 10, 10);
+        addIcon = loadImage("resources/add.png");
+        button = new Button(this, addIcon, 400 - 13, 50 - 13);
 
         /* Creating collection of cards. */
         cards = new ArrayList<>();
@@ -78,7 +80,7 @@ public class Rotation3D extends PApplet {
 
     @Override
     public void draw() {
-        background(color(149, 180, 240));
+        background(color(120, 135, 162));
         for (Card card : cards) {
             card.display();
         }
@@ -87,10 +89,16 @@ public class Rotation3D extends PApplet {
 
     @Override
     public void mouseClicked() {
-        super.mouseClicked();
-        focusCard.turn();
-        button.isPressed();
+        if (button.isPressed()) {
+//            button.perform();
+            cards.add(new Card(this) {
+                {
+                    moveRight();
+                }
+            });
+        }
     }
+
     @Override
     public void keyPressed() {
         super.keyPressed();

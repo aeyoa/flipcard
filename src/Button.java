@@ -28,8 +28,11 @@ public class Button {
         if (mouseX < xPos || mouseX > (xPos + image.width) || mouseY < yPos || mouseY > (yPos + image.height)) {
             return false;
         }
-        System.out.println("button pressed");
         return true;
+    }
+
+    public void perform() {
+        System.out.println("add new card");
     }
 
 }
