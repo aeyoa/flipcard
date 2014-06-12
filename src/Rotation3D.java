@@ -20,18 +20,19 @@ import java.util.List;
  */
 public class Rotation3D extends PApplet {
 
-    private Card focusCard;
-    private int focusIndex;
-    private List<Card> cards;
+//    private Card focusCard;
+//    private int focusIndex;
+//    private List<Card> cards;
     private Gson gson;
     private SDrop drop;
     private PImage addIcon;
     private Button button;
+    private CardsCollection cards;
 
     @Override
     public void setup() {
         size(800, 400, P3D);
-        textFont(createFont("MuseoSansCyrl-500", 40));
+        textFont(createFont("Helvetica-Bold", 30));
         noStroke();
         fill(255);
         rectMode(CENTER);
@@ -61,17 +62,10 @@ public class Rotation3D extends PApplet {
         addIcon = loadImage("resources/add.png");
         button = new Button(this, addIcon, 400 - 13, 50 - 13);
 
-        /* Creating collection of cards. */
-        cards = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
-            final Card newCard = new Card(this);
-            for (int j = 0; j < i; j++) {
-                newCard.moveRight();
-            }
-            cards.add(newCard);
-        }
-        focusIndex = 0;
-        focusCard = cards.get(focusIndex);
+        cards = new CardsCollection(this);
+
+//        focusIndex = 0;
+//        focusCard = cards.get(focusIndex);
 
         /*float fov = (PI / 14);
         float cameraZ = (float) (height / 2.0) / tan(fov / 2);
@@ -80,22 +74,15 @@ public class Rotation3D extends PApplet {
 
     @Override
     public void draw() {
-        background(color(120, 135, 162));
-        for (Card card : cards) {
-            card.display();
-        }
+        background(color(255, 255, 255));
+        cards.display();
         button.display();
     }
 
     @Override
     public void mouseClicked() {
         if (button.isPressed()) {
-//            button.perform();
-            cards.add(new Card(this) {
-                {
-                    moveRight();
-                }
-            });
+            cards.addCard();
         }
     }
 
@@ -104,61 +91,31 @@ public class Rotation3D extends PApplet {
         super.keyPressed();
         if (key == CODED) {
             if (keyCode == RIGHT) {
-                if (focusIndex < cards.size() - 1) {
-                    for (Card card : cards) {
-                        card.moveLeft();
-                    }
-                    focusCard = cards.get(++focusIndex);
-                }
+                cards.moveFocusRight();
             } else if (keyCode == LEFT) {
-                if (focusIndex > 0) {
-                    for (Card card : cards) {
-                        card.moveRight();
-                    }
-                    focusCard = cards.get(--focusIndex);
-                }
+                cards.moveFocusLeft();
             } else if (keyCode == UP) {
-                focusCard.turn();
+                cards.flipFocusCard();
             } else if (keyCode == SHIFT) {
-                try {
+                /*try {
                     final FileWriter fw = new FileWriter("cards.json");
                     gson.toJson(cards, fw);
                     fw.close();
                 } catch (IOException e) {
                     e.printStackTrace();
-                }
+                }*/
             }
         }
     }
 
     @Override
     public void keyReleased() {
-        if (key != CODED) {
-            switch (key) {
-                case BACKSPACE:
-                    focusCard.setCurrentSide(focusCard.getCurrentSide().substring(0, max(0, focusCard.getCurrentSide().length() - 1)));
-                    break;
-                case TAB:
-                    focusCard.setCurrentSide(focusCard.getCurrentSide() + "    ");
-                    break;
-                case ENTER:
-                case RETURN:
-                    // comment out the following two lines to disable line-breaks
-//                    focusCard.setCurrentSide(focusCard.getCurrentSide() + "\n");
-//                    break;
-                    focusCard.turn();
-                case ESC:
-                case DELETE:
-                    break;
-                default:
-                    focusCard.setCurrentSide(focusCard.getCurrentSide() + key);
-            }
-        }
+        cards.editFocusCard(key);
     }
 
     private void loadFromJSON(final String filename) throws FileNotFoundException {
         final FileReader fr = new FileReader(filename);
-        cards = gson.fromJson(fr, List.class);
+        cards = gson.fromJson(fr, CardsCollection.class);
     }
 
 
