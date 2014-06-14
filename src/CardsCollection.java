@@ -1,7 +1,6 @@
 import processing.core.PApplet;
 
 import java.util.ArrayList;
-import java.util.Locale;
 
 /**
  * Created by arsenykogan on 10/06/14.
@@ -55,6 +54,45 @@ public class CardsCollection {
         }).start();
     }
 
+    public void removeFocusCard() {
+        if (focusCard != null) {
+            focusCard.disappear();
+
+            /* Waiting while deleted card is moving down */
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        Thread.sleep(NEW_CARD_DELAY);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+
+                    /* Removing focusCard from collection. */
+                    cards.remove(focusIndex);
+
+                    if (cards.isEmpty()) {
+                        /* Last card in collection */
+                        focusCard = null;
+                        focusIndex = -1;
+                    } else if (focusIndex == cards.size()) {
+                        /* If focusCard is on the right */
+                        focusCard = cards.get(--focusIndex);
+                        for (Card card : cards) {
+                            card.moveRight();
+                        }
+                    } else {
+                        focusCard = cards.get(focusIndex);
+                        for (int i = focusIndex; i < cards.size(); i++) {
+                            cards.get(i).moveLeft();
+                        }
+                    }
+
+                }
+            }).start();
+        }
+    }
+
     /* TODO: check out culling */
     public void display() {
         for (Card card : cards) {
@@ -64,8 +102,8 @@ public class CardsCollection {
 
     public void moveFocusLeft() {
         /* If focusCard is not first. */
-        focusCard.endEditing();
         if (focusIndex > 0) {
+            focusCard.endEditing();
             for (Card card : cards) {
                 card.moveRight();
             }
@@ -86,10 +124,14 @@ public class CardsCollection {
     }
 
     public void flipFocusCard() {
-        focusCard.turn();
+        if (focusCard != null) {
+            focusCard.turn();
+        }
     }
 
     public void editFocusCard(final char key) {
-        focusCard.editText(key);
+        if (focusCard != null) {
+            focusCard.editText(key);
+        }
     }
 }

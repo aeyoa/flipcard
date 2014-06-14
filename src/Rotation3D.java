@@ -104,6 +104,7 @@ public class Rotation3D extends PApplet {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }*/
+                cards.removeFocusCard();
             }
         }
     }

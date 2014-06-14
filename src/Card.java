@@ -126,7 +126,7 @@ public class Card {
     private void drawText(final String text) {
         p.fill(TEXT_COLOR);
         p.text(text, 0, 0, 0);
-        if (isEditing && (p.millis() / 700 % 2 == 0)) {
+        if (isEditing && (Math.abs(angle - targetAngle) < 0.05) && (p.millis() / 700 % 2 == 0)) {
             float width = p.textWidth(text);
             p.stroke(127);
             p.strokeWeight(2);
