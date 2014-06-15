@@ -13,6 +13,9 @@ public class Card {
     private static float EASING = 0.1f;
     private static int STEP = 550;
     private static float STEP_EASING = 0.2f;
+    private Button removeButton;
+    private Button editButton;
+    private Button learnedButton;
 
     private final PApplet p;
     private float angle;
@@ -21,6 +24,7 @@ public class Card {
     private int yPos = 200;
     private int xPosTarget;
     private int yPosTarget;
+    private EasingValue editLayerHeight;
 
     /* Words on card sides. */
     private String sideA = "";
@@ -42,9 +46,23 @@ public class Card {
         this.yPosTarget = yPos;
         this.side = false;
         this.isEditing = true;
+        editLayerHeight = new EasingValue(0.09, 0.01);
+        editLayerHeight.setTarget(40);
+
+        /* Create buttons */
+        int buttonsY = 70;
+        removeButton = new Button(p, p.loadImage("resources/removeButton.png"), -60 - 10, buttonsY);
+        editButton = new Button(p, p.loadImage("resources/editButton.png"), 0 - 10, buttonsY);
+        learnedButton = new Button(p, p.loadImage("resources/learnedButton.png"), 60 - 10, buttonsY);
 
         p.fill(TEXT_COLOR);
         p.textSize(40);
+    }
+
+    public Card(final PApplet p, final String sideA, final String sideB) {
+        this(p);
+        this.sideA = sideA;
+        this.sideB = sideB;
     }
 
     public void display() {
@@ -75,8 +93,10 @@ public class Card {
         p.rectMode(p.CENTER);
         p.rect(0, 0, CARD_WIDTH, CARD_HEIGHT);
 
-        p.textAlign(p.CENTER, p.CENTER);
+        checkMousePos();
+        drawEditLayer();
 
+        p.textAlign(p.CENTER, p.CENTER);
         /*Translate text a bit higher. */
         p.translate(0, -5, 0);
         p.translate(0, 0, 2);
@@ -115,6 +135,14 @@ public class Card {
         return (side) ? sideB : sideA;
     }
 
+    public String getSideA() {
+        return sideA;
+    }
+
+    public String getSideB() {
+        return sideB;
+    }
+
     public void setCurrentSide(final String text) {
         if (this.side) {
             this.sideB = text;
@@ -134,6 +162,29 @@ public class Card {
         }
     }
 
+    private void drawEditLayer() {
+        p.rectMode(p.BOTTOM);
+        p.fill(255, 255, 255, 127);
+        editLayerHeight.update();
+        p.rect(-CARD_WIDTH / 2, CARD_HEIGHT / 2, CARD_WIDTH / 2, CARD_HEIGHT / 2 - (float) editLayerHeight.getCurrentValue());
+
+        if (editLayerHeight.getCurrentValue() > 35) {
+            removeButton.display();
+            editButton.display();
+            if (editButton.isPressed()) {
+                this.isEditing = true;
+            }
+            learnedButton.display();
+        }
+    }
+
+    private void checkMousePos() {
+        if (p.mouseX > 200 && p.mouseX < 600 && p.mouseY > 100 && p.mouseY < 300) {
+            editLayerHeight.setTarget(45);
+        }
+    }
+
+
     public void editText(final char key) {
         if (isEditing && key != p.CODED) {
             if (key == p.BACKSPACE) {
@@ -147,6 +198,7 @@ public class Card {
     }
 
     public void endEditing() {
+        editLayerHeight.setTarget(0);
         isEditing = false;
     }
 

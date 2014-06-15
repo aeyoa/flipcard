@@ -1,6 +1,7 @@
 import processing.core.PApplet;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by arsenykogan on 10/06/14.
@@ -19,6 +20,27 @@ public class CardsCollection {
         cards = new ArrayList<>();
         focusCard = null;
         focusIndex = -1;
+    }
+
+    /* Create collection from JSON file */
+    public CardsCollection(final PApplet pApplet, final CardsCollectionExport export) {
+        this.pApplet = pApplet;
+        cards = new ArrayList<>();
+        int i = 0;
+        for (CardsCollectionExport.CardWrapper cardWrapper : export.cardWrappers) {
+            final Card newCard = new Card(pApplet, cardWrapper.getSideA(), cardWrapper.getSideB());
+            for (int j = 0; j < i; j++) {
+                newCard.moveRight();
+            }
+            newCard.endEditing();
+            cards.add(newCard);
+            i++;
+        }
+        focusIndex = 0;
+        focusCard = cards.get(focusIndex);
+        for (Card card : cards) {
+            card.appear();
+        }
     }
 
     /* TODO: add language switching (java.util.Locale) */
@@ -132,6 +154,42 @@ public class CardsCollection {
     public void editFocusCard(final char key) {
         if (focusCard != null) {
             focusCard.editText(key);
+        }
+    }
+
+    /* Wrapper to cards collection for JSON export. */
+    public CardsCollectionExport getCardsCollectionExport() {
+        return new CardsCollectionExport(cards);
+    }
+
+    public class CardsCollectionExport {
+
+        private CardWrapper[] cardWrappers;
+
+        public CardsCollectionExport(final List<Card> cards) {
+            cardWrappers = new CardWrapper[cards.size()];
+            for (int i = 0; i < cards.size(); i++) {
+                cardWrappers[i] = new CardWrapper(cards.get(i).getSideA(), cards.get(i).getSideB());
+            }
+        }
+
+        private class CardWrapper {
+
+            private final String sideA;
+            private final String sideB;
+
+            private CardWrapper(final String sideB, final String sideA) {
+                this.sideB = sideB;
+                this.sideA = sideA;
+            }
+
+            public String getSideA() {
+                return sideA;
+            }
+
+            public String getSideB() {
+                return sideB;
+            }
         }
     }
 }

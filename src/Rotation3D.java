@@ -17,6 +17,10 @@ import java.util.List;
 
 /**
  * Created by arsenykogan on 24/05/14.
+ *
+ * TODO: shuffle / unsuffle
+ * TODO: rounded scroll
+ * TODO: learned collection
  */
 public class Rotation3D extends PApplet {
 
@@ -64,9 +68,6 @@ public class Rotation3D extends PApplet {
 
         cards = new CardsCollection(this);
 
-//        focusIndex = 0;
-//        focusCard = cards.get(focusIndex);
-
         /*float fov = (PI / 14);
         float cameraZ = (float) (height / 2.0) / tan(fov / 2);
         perspective(fov, (float) width / height, cameraZ / 10, cameraZ * 10);*/
@@ -88,7 +89,7 @@ public class Rotation3D extends PApplet {
 
     @Override
     public void keyPressed() {
-        super.keyPressed();
+        cards.editFocusCard(key);
         if (key == CODED) {
             if (keyCode == RIGHT) {
                 cards.moveFocusRight();
@@ -97,26 +98,27 @@ public class Rotation3D extends PApplet {
             } else if (keyCode == UP) {
                 cards.flipFocusCard();
             } else if (keyCode == SHIFT) {
-                /*try {
+                try {
                     final FileWriter fw = new FileWriter("cards.json");
-                    gson.toJson(cards, fw);
+                    gson.toJson(cards.getCardsCollectionExport(), fw);
                     fw.close();
                 } catch (IOException e) {
                     e.printStackTrace();
-                }*/
-                cards.removeFocusCard();
+                }
+            } else if (keyCode == DOWN) {
+                try {
+                    loadFromJSON("cards.json");
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
             }
         }
     }
 
-    @Override
-    public void keyReleased() {
-        cards.editFocusCard(key);
-    }
 
     private void loadFromJSON(final String filename) throws FileNotFoundException {
         final FileReader fr = new FileReader(filename);
-        cards = gson.fromJson(fr, CardsCollection.class);
+        cards = new CardsCollection(this, gson.fromJson(fr, CardsCollection.CardsCollectionExport.class));
     }
 
 
