@@ -28,7 +28,7 @@ public class CardsCollection {
         cards = new ArrayList<>();
         int i = 0;
         for (CardsCollectionExport.CardWrapper cardWrapper : export.cardWrappers) {
-            final Card newCard = new Card(pApplet, cardWrapper.getSideA(), cardWrapper.getSideB());
+            final Card newCard = new Card(pApplet, this, cardWrapper.getSideA(), cardWrapper.getSideB());
             for (int j = 0; j < i; j++) {
                 newCard.moveRight();
             }
@@ -55,7 +55,7 @@ public class CardsCollection {
             cards.get(i).moveLeft();
         }
         /* Create new card and insert it to the cards list. */
-        final Card newCard = new Card(pApplet);
+        final Card newCard = new Card(pApplet, this);
         cards.add(focusIndex + 1, newCard);
 
         /* Waiting while cards moving to the left */
@@ -154,6 +154,12 @@ public class CardsCollection {
     public void editFocusCard(final char key) {
         if (focusCard != null) {
             focusCard.editText(key);
+        }
+    }
+
+    public void mouseClicked() {
+        if (focusCard != null) {
+            focusCard.mouseClicked();
         }
     }
 

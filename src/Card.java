@@ -13,18 +13,16 @@ public class Card {
     private static float EASING = 0.1f;
     private static int STEP = 550;
     private static float STEP_EASING = 0.2f;
-    private Button removeButton;
-    private Button editButton;
-    private Button learnedButton;
 
     private final PApplet p;
+    private CardsCollection collection;
     private float angle;
     private float targetAngle;
     private int xPos = 400;
     private int yPos = 200;
     private int xPosTarget;
     private int yPosTarget;
-    private EasingValue editLayerHeight;
+    private final EditLayer editLayer;
 
     /* Words on card sides. */
     private String sideA = "";
@@ -33,8 +31,9 @@ public class Card {
     private Boolean side;
     private boolean isEditing;
 
-    public Card(final PApplet p) {
+    public Card(final PApplet p, final CardsCollection collection) {
         this.p = p;
+        this.collection = collection;
         /* Initialize colors. */
         TEXT_COLOR = p.color(255);
         CARD_COLOR = p.color(162, 162, 162);
@@ -46,28 +45,22 @@ public class Card {
         this.yPosTarget = yPos;
         this.side = false;
         this.isEditing = true;
-        editLayerHeight = new EasingValue(0.09, 0.01);
-        editLayerHeight.setTarget(40);
-
-        /* Create buttons */
-        int buttonsY = 70;
-        removeButton = new Button(p, p.loadImage("resources/removeButton.png"), -60 - 10, buttonsY);
-        editButton = new Button(p, p.loadImage("resources/editButton.png"), 0 - 10, buttonsY);
-        learnedButton = new Button(p, p.loadImage("resources/learnedButton.png"), 60 - 10, buttonsY);
+        this.editLayer = new EditLayer(p, this);
 
         p.fill(TEXT_COLOR);
         p.textSize(40);
     }
 
-    public Card(final PApplet p, final String sideA, final String sideB) {
-        this(p);
+    public Card(final PApplet p, final CardsCollection collection, final String sideA, final String sideB) {
+        this(p, collection);
         this.sideA = sideA;
         this.sideB = sideB;
     }
 
     public void display() {
         p.pushMatrix();
-            /* Filling card with CARD_COLOR. */
+
+        /* Filling card with CARD_COLOR. */
         p.fill(CARD_COLOR);
         p.noStroke();
 
@@ -93,20 +86,27 @@ public class Card {
         p.rectMode(p.CENTER);
         p.rect(0, 0, CARD_WIDTH, CARD_HEIGHT);
 
-        checkMousePos();
-        drawEditLayer();
-
         p.textAlign(p.CENTER, p.CENTER);
-        /*Translate text a bit higher. */
-        p.translate(0, -5, 0);
-        p.translate(0, 0, 2);
+        float roundAngle = angle % (p.TWO_PI);
+        if (roundAngle < p.HALF_PI || roundAngle > (p.HALF_PI + p.PI)) {
+            p.translate(0, 0, 2);
+            /* A-side edit layer */
+            editLayer.display();
+            /*Translate text a bit higher. */
+            p.translate(0, -5, 0);
+            drawText(sideA);
+            p.translate(0, 5, 0);
 
-        drawText(sideA);
+        } else {
+            p.translate(0, 0, -2);
+            p.rotateY(p.PI);
+            /* B-side edit layer */
+            editLayer.display();
+            p.translate(0, -5, 0);
+            drawText(sideB);
+            p.translate(0, 5, 0);
+        }
 
-        p.translate(0, 0, -4);
-        p.rotateY(p.PI);
-
-        drawText(sideB);
         p.popMatrix();
     }
 
@@ -162,28 +162,6 @@ public class Card {
         }
     }
 
-    private void drawEditLayer() {
-        p.rectMode(p.BOTTOM);
-        p.fill(255, 255, 255, 127);
-        editLayerHeight.update();
-        p.rect(-CARD_WIDTH / 2, CARD_HEIGHT / 2, CARD_WIDTH / 2, CARD_HEIGHT / 2 - (float) editLayerHeight.getCurrentValue());
-
-        if (editLayerHeight.getCurrentValue() > 35) {
-            removeButton.display();
-            editButton.display();
-            if (editButton.isPressed()) {
-                this.isEditing = true;
-            }
-            learnedButton.display();
-        }
-    }
-
-    private void checkMousePos() {
-        if (p.mouseX > 200 && p.mouseX < 600 && p.mouseY > 100 && p.mouseY < 300) {
-            editLayerHeight.setTarget(45);
-        }
-    }
-
 
     public void editText(final char key) {
         if (isEditing && key != p.CODED) {
@@ -198,16 +176,15 @@ public class Card {
     }
 
     public void endEditing() {
-        editLayerHeight.setTarget(0);
+        editLayer.deactivate();
         isEditing = false;
     }
 
+    public void mouseClicked() {
+        editLayer.mouseClicked();
+    }
 
-    @Override
-    public String toString() {
-        return "Card{" +
-                "xPos=" + xPos +
-                ", yPos=" + yPos +
-                '}';
+    public CardsCollection getCollection() {
+        return collection;
     }
 }

@@ -5,19 +5,15 @@ import processing.core.PImage;
 import sojamo.drop.DropEvent;
 import sojamo.drop.DropListener;
 import sojamo.drop.SDrop;
-import sun.text.resources.FormatData_in;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
 
 /**
  * Created by arsenykogan on 24/05/14.
- *
+ * <p/>
  * TODO: shuffle / unsuffle
  * TODO: rounded scroll
  * TODO: learned collection
@@ -68,6 +64,7 @@ public class Rotation3D extends PApplet {
 
         cards = new CardsCollection(this);
 
+
         /*float fov = (PI / 14);
         float cameraZ = (float) (height / 2.0) / tan(fov / 2);
         perspective(fov, (float) width / height, cameraZ / 10, cameraZ * 10);*/
@@ -85,6 +82,7 @@ public class Rotation3D extends PApplet {
         if (button.isPressed()) {
             cards.addCard();
         }
+        cards.mouseClicked();
     }
 
     @Override
