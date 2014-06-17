@@ -180,6 +180,10 @@ public class Card {
         isEditing = false;
     }
 
+    public void startEditing() {
+        isEditing = true;
+    }
+
     public void mouseClicked() {
         editLayer.mouseClicked();
     }

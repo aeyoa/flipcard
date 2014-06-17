@@ -52,9 +52,11 @@ public class EditLayer {
                 CARD_RIGHT_BOTTOM_X, CARD_BOTTOM_Y);
         if (currentHeight.getCurrentValue() > HEIGHT_THRESHOLD) {
             /* Show icons */
+            pApplet.translate(0, 0, 1);
             removeButton.display();
             editButton.display();
             learnedButton.display();
+            pApplet.translate(0, 0, -1);
         }
 
     }
@@ -64,6 +66,9 @@ public class EditLayer {
             /* Check for clicks */
             if (removeButton.isPressed()) {
                 card.getCollection().removeFocusCard();
+            }
+            if (editButton.isPressed()) {
+                card.startEditing();
             }
         }
     }
@@ -83,7 +88,8 @@ public class EditLayer {
     }
 
     private void checkForHover() {
-        if (pApplet.mouseX > 200 && pApplet.mouseX < 600 && pApplet.mouseY > 100 && pApplet.mouseY < 300) {
+        if (pApplet.mouseX > pApplet.screenX(-200, 0) && pApplet.mouseX < pApplet.screenX(200, 0)
+                && pApplet.mouseY > pApplet.screenY(0, -100) && pApplet.mouseY < pApplet.screenY(0, 100)) {
             activate();
         } else if (!justCreated) {
             deactivate();
