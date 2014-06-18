@@ -26,8 +26,13 @@ public class Rotation3D extends PApplet {
     private Gson gson;
     private SDrop drop;
     private PImage addIcon;
-    private Button button;
     private CardsCollection cards;
+
+    /* Buttons */
+    private Button button;
+    private final FakeButton goLeftButton = new FakeButton(this, 0, 0, 200, 400);
+    private final FakeButton goRightButton = new FakeButton(this, 600, 0, 800, 400);
+    private final DropDownMenu menu = new DropDownMenu(this);
 
     @Override
     public void setup() {
@@ -39,26 +44,26 @@ public class Rotation3D extends PApplet {
 
         gson = new GsonBuilder().create();
         drop = new SDrop(this);
-        drop.addDropListener(new DropListener() {
+                drop.addDropListener(new DropListener() {
 
-            {
-                setTargetRect(0, 0, width, height);
-            }
+                    {
+                        setTargetRect(0, 0, width, height);
+                    }
 
-            @Override
-            public void dropEvent(final DropEvent dropEvent) {
-                try {
-                    loadFromJSON(dropEvent.toString());
-                } catch (FileNotFoundException e) {
-                    e.printStackTrace();
-                }
-            }
+                    @Override
+                    public void dropEvent(final DropEvent dropEvent) {
+                        try {
+                            loadFromJSON(dropEvent.toString());
+                        } catch (FileNotFoundException e) {
+                            e.printStackTrace();
+                        }
+                    }
 
-            @Override
-            public void dropEnter() {
-                System.out.println("hello");
-            }
-        });
+                    @Override
+                    public void dropEnter() {
+                        System.out.println("hello");
+                    }
+                });
         addIcon = loadImage("resources/add.png");
         button = new Button(this, addIcon, 400 - 13, 50 - 13);
 
@@ -75,6 +80,7 @@ public class Rotation3D extends PApplet {
         background(color(255, 255, 255));
         cards.display();
         button.display();
+        menu.display();
     }
 
     @Override
@@ -82,7 +88,14 @@ public class Rotation3D extends PApplet {
         if (button.isPressed()) {
             cards.addCard();
         }
+        if (goLeftButton.isPressed()) {
+            cards.moveFocusLeft();
+        }
+        if (goRightButton.isPressed()) {
+            cards.moveFocusRight();
+        }
         cards.mouseClicked();
+        menu.mouseClicked();
     }
 
     @Override

@@ -22,8 +22,18 @@ public class RoundButton {
     }
 
     public void display() {
+        this.display(0);
+    }
+
+    public void display(final float rotationAngle) {
+        p.pushMatrix();
+
         p.imageMode(p.CENTER);
-        p.image(image, xPos, yPos);
+        p.translate(xPos, yPos, 0);
+        p.rotateZ(rotationAngle);
+        p.image(image, 0, 0);
+        p.popMatrix();
+
         screenX = p.screenX(xPos, yPos);
         screenY = p.screenY(xPos, yPos);
     }
@@ -41,5 +51,4 @@ public class RoundButton {
     public void perform() {
         System.out.println("add new card");
     }
-
 }
