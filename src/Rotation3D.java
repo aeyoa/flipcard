@@ -20,19 +20,16 @@ import java.io.IOException;
  */
 public class Rotation3D extends PApplet {
 
-//    private Card focusCard;
-//    private int focusIndex;
-//    private List<Card> cards;
     private Gson gson;
     private SDrop drop;
     private PImage addIcon;
     private CardsCollection cards;
 
     /* Buttons */
-    private Button button;
+    private RectButtonCenter button;
     private final FakeButton goLeftButton = new FakeButton(this, 0, 0, 200, 400);
     private final FakeButton goRightButton = new FakeButton(this, 600, 0, 800, 400);
-    private final DropDownMenu menu = new DropDownMenu(this);
+    private DropDownMenu menu;
 
     @Override
     public void setup() {
@@ -44,30 +41,27 @@ public class Rotation3D extends PApplet {
 
         gson = new GsonBuilder().create();
         drop = new SDrop(this);
-                drop.addDropListener(new DropListener() {
+        drop.addDropListener(new DropListener() {
 
-                    {
-                        setTargetRect(0, 0, width, height);
-                    }
+            {
+                setTargetRect(0, 0, width, height);
+            }
 
-                    @Override
-                    public void dropEvent(final DropEvent dropEvent) {
-                        try {
-                            loadFromJSON(dropEvent.toString());
-                        } catch (FileNotFoundException e) {
-                            e.printStackTrace();
-                        }
-                    }
+            @Override
+            public void dropEvent(final DropEvent dropEvent) {
+                    loadFromJSON(dropEvent.toString());
+            }
 
-                    @Override
-                    public void dropEnter() {
-                        System.out.println("hello");
-                    }
-                });
-        addIcon = loadImage("resources/add.png");
-        button = new Button(this, addIcon, 400 - 13, 50 - 13);
+            @Override
+            public void dropEnter() {
+                System.out.println("hello");
+            }
+        });
+        addIcon = loadImage("add.png");
+        button = new RectButtonCenter(this, addIcon, 400, 50);
 
         cards = new CardsCollection(this);
+        menu = new DropDownMenu(this);
 
 
         /*float fov = (PI / 14);
@@ -108,28 +102,29 @@ public class Rotation3D extends PApplet {
                 cards.moveFocusLeft();
             } else if (keyCode == UP) {
                 cards.flipFocusCard();
-            } else if (keyCode == SHIFT) {
-                try {
-                    final FileWriter fw = new FileWriter("cards.json");
-                    gson.toJson(cards.getCardsCollectionExport(), fw);
-                    fw.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            } else if (keyCode == DOWN) {
-                try {
-                    loadFromJSON("cards.json");
-                } catch (FileNotFoundException e) {
-                    e.printStackTrace();
-                }
             }
         }
     }
 
+    public void saveToJSON() {
+        try {
+            final FileWriter fw = new FileWriter("cards.json");
+            gson.toJson(cards.getCardsCollectionExport(), fw);
+            fw.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
-    private void loadFromJSON(final String filename) throws FileNotFoundException {
-        final FileReader fr = new FileReader(filename);
-        cards = new CardsCollection(this, gson.fromJson(fr, CardsCollection.CardsCollectionExport.class));
+
+    public void loadFromJSON(final String filename) {
+        final FileReader fr;
+        try {
+            fr = new FileReader(filename);
+            cards = new CardsCollection(this, gson.fromJson(fr, CardsCollection.CardsCollectionExport.class));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
 
