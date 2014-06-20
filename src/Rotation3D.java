@@ -6,10 +6,8 @@ import sojamo.drop.DropEvent;
 import sojamo.drop.DropListener;
 import sojamo.drop.SDrop;
 
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
+import java.lang.reflect.Method;
 
 /**
  * Created by arsenykogan on 24/05/14.
@@ -49,7 +47,7 @@ public class Rotation3D extends PApplet {
 
             @Override
             public void dropEvent(final DropEvent dropEvent) {
-                    loadFromJSON(dropEvent.toString());
+                loadFromJSON(dropEvent.toString());
             }
 
             @Override
@@ -62,7 +60,6 @@ public class Rotation3D extends PApplet {
 
         cards = new CardsCollection(this);
         menu = new DropDownMenu(this);
-
 
         /*float fov = (PI / 14);
         float cameraZ = (float) (height / 2.0) / tan(fov / 2);
@@ -106,14 +103,18 @@ public class Rotation3D extends PApplet {
         }
     }
 
-    public void saveToJSON() {
+    public void saveToJSONCallback(final File selectedFile) {
         try {
-            final FileWriter fw = new FileWriter("cards.json");
+            final FileWriter fw = new FileWriter(selectedFile.getAbsolutePath() + ".cards");
             gson.toJson(cards.getCardsCollectionExport(), fw);
             fw.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public void saveToJSON() {
+        selectOutput("Save", "saveToJSONCallback");
     }
 
 
