@@ -151,6 +151,7 @@ public class CardsCollection {
         }
     }
 
+    
     public void editFocusCard(final char key) {
         if (focusCard != null) {
             focusCard.editText(key);
