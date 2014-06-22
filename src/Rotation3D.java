@@ -99,6 +99,8 @@ public class Rotation3D extends PApplet {
                 cards.moveFocusLeft();
             } else if (keyCode == UP) {
                 cards.flipFocusCard();
+            } else if (keyCode == DOWN) {
+                cards.moveToFirstCard();
             }
         }
     }

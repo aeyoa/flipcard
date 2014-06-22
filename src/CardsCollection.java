@@ -142,6 +142,8 @@ public class CardsCollection {
                 card.moveLeft();
             }
             focusCard = cards.get(++focusIndex);
+        } else {
+            this.moveToFirstCard();
         }
     }
 
@@ -151,10 +153,22 @@ public class CardsCollection {
         }
     }
 
-    
+
     public void editFocusCard(final char key) {
         if (focusCard != null) {
             focusCard.editText(key);
+        }
+    }
+
+    public void moveToFirstCard() {
+        if (focusCard != null && focusIndex == cards.size() - 1) {
+            for (Card card : cards) {
+                for (int i = 0; i < cards.size() - 1; i++) {
+                    card.moveRight();
+                }
+            }
+            focusCard = cards.get(0);
+            focusIndex = 0;
         }
     }
 
