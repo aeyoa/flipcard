@@ -13,6 +13,8 @@ public class Card {
     private static float EASING = 0.1f;
     private static int STEP = 550;
     private static float STEP_EASING = 0.2f;
+    private static int MAX_TEXT_WIDTH = 300;
+    private static int TEXT_SIZE = 40;
 
     private final PApplet p;
     private CardsCollection collection;
@@ -23,6 +25,8 @@ public class Card {
     private int xPosTarget;
     private int yPosTarget;
     private final EditLayer editLayer;
+    private int currentTextSizeA;
+    private int currentTextSizeB;
 
     /* Words on card sides. */
     private String sideA = "";
@@ -35,8 +39,8 @@ public class Card {
         this.p = p;
         this.collection = collection;
         /* Initialize colors. */
-        TEXT_COLOR = p.color(255);
-        CARD_COLOR = p.color(162, 162, 162);
+        TEXT_COLOR = p.color(42, 58, 72);
+        CARD_COLOR = p.color(178, 212, 220);
         this.angle = 0;
         this.targetAngle = 0;
         this.xPosTarget = xPos;
@@ -47,8 +51,9 @@ public class Card {
         this.isEditing = true;
         this.editLayer = new EditLayer(p, this);
 
+        currentTextSizeA = TEXT_SIZE;
+        currentTextSizeB = TEXT_SIZE;
         p.fill(TEXT_COLOR);
-        p.textSize(40);
     }
 
     public Card(final PApplet p, final CardsCollection collection, final String sideA, final String sideB) {
@@ -153,6 +158,12 @@ public class Card {
 
     private void drawText(final String text) {
         p.fill(TEXT_COLOR);
+        float roundAngle = angle % (p.TWO_PI);
+        if (roundAngle < p.HALF_PI || roundAngle > (p.HALF_PI + p.PI)) {
+            p.textSize(currentTextSizeA);
+        } else {
+            p.textSize(currentTextSizeB);
+        }
         p.text(text, 0, 0, 0);
         if (isEditing && (Math.abs(angle - targetAngle) < 0.05) && (p.millis() / 700 % 2 == 0)) {
             float width = p.textWidth(text);
@@ -167,10 +178,29 @@ public class Card {
         if (isEditing && key != p.CODED) {
             if (key == p.BACKSPACE) {
                 this.setCurrentSide(this.getCurrentSide().substring(0, Math.max(0, this.getCurrentSide().length() - 1)));
+                /* Increase text font */
+                if (p.textWidth(this.getCurrentSide() + "—-") < MAX_TEXT_WIDTH) {
+                    if (side) {
+                        if (currentTextSizeB < TEXT_SIZE) {
+                            currentTextSizeB++;
+                        }
+                    } else {
+                        if (currentTextSizeA < TEXT_SIZE) {
+                            currentTextSizeA++;
+                        }
+                    }
+                }
             } else if (key == p.ENTER || key == p.RETURN) {
                 this.turn();
             } else {
                 this.setCurrentSide(this.getCurrentSide() + key);
+            }
+        }
+        if (p.textWidth(this.getCurrentSide()) > MAX_TEXT_WIDTH) {
+            if (side) {
+                currentTextSizeB--;
+            } else {
+                currentTextSizeA--;
             }
         }
     }
