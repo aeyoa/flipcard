@@ -27,6 +27,7 @@ public class Rotation3D extends PApplet {
     private RectButtonCenter button;
     private final FakeButton goLeftButton = new FakeButton(this, 0, 0, 200, 400);
     private final FakeButton goRightButton = new FakeButton(this, 600, 0, 800, 400);
+    private final RectButtonCenter jumpButton = new RectButtonCenter(this, loadImage("jump.png"), 750, 200);
     private DropDownMenu menu;
 
     @Override
@@ -72,6 +73,7 @@ public class Rotation3D extends PApplet {
         cards.display();
         button.display();
         menu.display();
+        jumpButton.display();
     }
 
     @Override
