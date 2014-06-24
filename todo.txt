@@ -1,0 +1,42 @@
+
+BUTTONS:
+_ effect when pressing (add)
+_ effect when pressing (menu)
+_ (save) (shuffle) (learned) effects
+_ effects on (delete), (edit), (learned)
+
+REFACTOR:
+_ rename and refactor structure
+_ file with constants
+_ change pApplet to Rotation3D
+
+_ show (toStart) only when needed
+_ right animation in menu items
+_ fix nullPointer when pressing cancel after save
+_ right spaces between menu items
+_ animation after saving
+_ move edit panel below card
+_ implement 'learned cards'
+_ changing size of cursor
+_ card rotation on click
+_ stop edit on [esc]
+_ fix A/B side bug
+_ add min font size and max string length
+_ fix (left) and (right) areas
+_ some effect on file d&d
+_ fix font bug when d&d card collection
+_ add initial background
+_ add (left) and (right) buttons
+
++ image cards and d&d
++ flip all feature
++ attach audio file
++ add shortcuts [space] - flip, [cmd+enter] - create new, [cmd+backspace] - delete, [cmd+e] - edit
++ rotation back when creating new card
++ (new) menu item (?)
++ multiline input
++ scrolling thought cards
++ try z-depth when scrolling thought cards
++ can't create feature when empty card on screen
++ associate file extension with app and icon
+
