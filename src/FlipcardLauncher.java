@@ -3,8 +3,8 @@ import processing.core.PApplet;
 /**
  * Created by arsenykogan on 24/05/14.
  */
-public class Rotation3DLauncher {
+public class FlipcardLauncher {
     public static void main(String[] args) {
-        PApplet.main(new String[]{"Rotation3D"});
+        PApplet.main(new String[]{"Flipcard"});
     }
 }

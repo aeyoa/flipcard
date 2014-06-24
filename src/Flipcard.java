@@ -7,7 +7,6 @@ import sojamo.drop.DropListener;
 import sojamo.drop.SDrop;
 
 import java.io.*;
-import java.lang.reflect.Method;
 
 /**
  * Created by arsenykogan on 24/05/14.
@@ -16,7 +15,7 @@ import java.lang.reflect.Method;
  * TODO: rounded scroll
  * TODO: learned collection
  */
-public class Rotation3D extends PApplet {
+public class Flipcard extends PApplet {
 
     private Gson gson;
     private SDrop drop;
@@ -24,10 +23,10 @@ public class Rotation3D extends PApplet {
     private CardsCollection cards;
 
     /* Buttons */
-    private RectButtonCenter button;
-    private final FakeButton goLeftButton = new FakeButton(this, 0, 0, 200, 400);
-    private final FakeButton goRightButton = new FakeButton(this, 600, 0, 800, 400);
-    private final RectButtonCenter jumpButton = new RectButtonCenter(this, loadImage("jump.png"), 750, 200);
+    private Button button;
+    private final ButtonArea goLeftButton = new ButtonArea(this, 0, 0, 200, 400);
+    private final ButtonArea goRightButton = new ButtonArea(this, 600, 0, 800, 400);
+    private final Button jumpButton = new Button(this, loadImage("jump.png"), 750, 200);
     private DropDownMenu menu;
 
     @Override
@@ -57,7 +56,7 @@ public class Rotation3D extends PApplet {
             }
         });
         addIcon = loadImage("add.png");
-        button = new RectButtonCenter(this, addIcon, 400, 50);
+        button = new Button(this, addIcon, 400, 50);
 
         cards = new CardsCollection(this);
         menu = new DropDownMenu(this);

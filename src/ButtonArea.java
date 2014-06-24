@@ -1,10 +1,9 @@
 import processing.core.PApplet;
-import processing.core.PImage;
 
 /**
  * Created by arsenykogan on 17/06/14.
  */
-public class FakeButton {
+public class ButtonArea {
 
     private final PApplet p;
     private int x1Pos;
@@ -12,12 +11,12 @@ public class FakeButton {
     private int x2Pos;
     private int y2Pos;
 
-    public FakeButton(final PApplet p, final int upperLeftXPos, final int upperLeftYPos, final int bottomRightXPpos, final int bottomRightYPpos) {
+    public ButtonArea(final PApplet p, final int upperLeftXPos, final int upperLeftYPos, final int bottomRightXPos, final int bottomRightYPos) {
         this.p = p;
         this.x1Pos = upperLeftXPos;
         this.y1Pos = upperLeftYPos;
-        this.x2Pos = bottomRightXPpos;
-        this.y2Pos = bottomRightYPpos;
+        this.x2Pos = bottomRightXPos;
+        this.y2Pos = bottomRightYPos;
     }
 
     public boolean isPressed() {

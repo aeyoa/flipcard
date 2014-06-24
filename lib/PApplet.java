@@ -24,13 +24,8 @@
 
 package processing.core;
 
-import processing.data.*;
-import processing.event.*;
 import processing.event.Event;
-import processing.opengl.*;
 
-import java.applet.*;
-import java.awt.*;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.awt.event.FocusEvent;
@@ -44,14 +39,6 @@ import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.awt.image.*;
-import java.io.*;
-import java.lang.reflect.*;
-import java.net.*;
-import java.text.*;
-import java.util.*;
-import java.util.regex.*;
-import java.util.zip.*;
 
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
@@ -62,10 +49,10 @@ import javax.swing.filechooser.FileSystemView;
 /**
  * Base class for all sketches that use processing.core.
  * <p/>
- * Note that you should not use AWT or Swing components inside a Processing
+ * Note that you should not use AWT or Swing flipcard.components inside a Processing
  * applet. The surface is made to automatically update itself, and will cause
- * problems with redraw of components drawn above it. If you'd like to
- * integrate other Java components, see below.
+ * problems with redraw of flipcard.components drawn above it. If you'd like to
+ * integrate other Java flipcard.components, see below.
  * <p/>
  * The <A HREF="http://wiki.processing.org/w/Window_Size_and_Full_Screen">
  * Window Size and Full Screen</A> page on the Wiki has useful information
@@ -102,7 +89,7 @@ import javax.swing.filechooser.FileSystemView;
  * It is possible to use PApplet, along with core.jar in other projects.
  * This also allows you to embed a Processing drawing area into another Java
  * application. This means you can use standard GUI controls with a Processing
- * sketch. Because AWT and Swing GUI components cannot be used on top of a
+ * sketch. Because AWT and Swing GUI flipcard.components cannot be used on top of a
  * PApplet, you can instead embed the PApplet inside another GUI the way you
  * would any other Component.
  * <p/>
@@ -386,8 +373,8 @@ public class PApplet extends Applet
    * set the variable <b>b</b> to be equal to the value at that location in
    * the array.<br />
    * <br />
-   * Before accessing this array, the data must loaded with the
-   * <b>loadPixels()</b> function. After the array data has been modified,
+   * Before accessing this array, the flipcard.data must loaded with the
+   * <b>loadPixels()</b> function. After the array flipcard.data has been modified,
    * the <b>updatePixels()</b> function must be run to update the changes.
    * Without <b>loadPixels()</b>, running the code may (or will in future
    * releases) result in a NullPointerException.
@@ -896,7 +883,7 @@ public class PApplet extends Applet
   //static final boolean CRUSTY_THREADS = false; //true;
 
   /**
-   * Applet initialization. This can do GUI work because the components have
+   * Applet initialization. This can do GUI work because the flipcard.components have
    * not been 'realized' yet: things aren't visible, displayed, etc.
    */
   @Override
@@ -4445,14 +4432,14 @@ public class PApplet extends Applet
    * ( begin auto-generated from print.xml )
    *
    * Writes to the console area of the Processing environment. This is often
-   * helpful for looking at the data a program is producing. The companion
+   * helpful for looking at the flipcard.data a program is producing. The companion
    * function <b>println()</b> works like <b>print()</b>, but creates a new
    * line of text for each call to the function. Individual elements can be
    * separated with quotes ("") and joined with the addition operator (+).<br />
    * <br />
    * Beginning with release 0125, to print the contents of an array, use
    * println(). There's no sensible way to do a <b>print()</b> of an array,
-   * because there are too many possibilities for how to separate the data
+   * because there are too many possibilities for how to separate the flipcard.data
    * (spaces, commas, etc). If you want to print an array as a single line,
    * use <b>join()</b>. With <b>join()</b>, you can choose any delimiter you
    * like and <b>print()</b> the result.<br />
@@ -4467,7 +4454,7 @@ public class PApplet extends Applet
    * ( end auto-generated )
  * @webref output:text_area
  * @usage IDE
- * @param what data to print to console
+ * @param what flipcard.data to print to console
  * @see PApplet#println()
  * @see PApplet#printArray(Object)
  * @see PApplet#join(String[], char)
@@ -4513,7 +4500,7 @@ public class PApplet extends Applet
   }
 
   /**
-   * @param variables list of data, separated by commas
+   * @param variables list of flipcard.data, separated by commas
    */
   static public void print(Object... variables) {
     StringBuilder sb = new StringBuilder();
@@ -4547,13 +4534,13 @@ public class PApplet extends Applet
    * ( begin auto-generated from println.xml )
    *
    * Writes to the text area of the Processing environment's console. This is
-   * often helpful for looking at the data a program is producing. Each call
+   * often helpful for looking at the flipcard.data a program is producing. Each call
    * to this function creates a new line of output. Individual elements can
    * be separated with quotes ("") and joined with the string concatenation
    * operator (+). See <b>print()</b> for more about what to expect in the output.
    * <br/><br/> <b>println()</b> on an array (by itself) will write the
    * contents of the array to the console. This is often helpful for looking
-   * at the data a program is producing. A new line is put between each
+   * at the flipcard.data a program is producing. A new line is put between each
    * element of the array. This function can only print one dimensional
    * arrays. For arrays with higher dimensions, the result will be closer to
    * that of <b>print()</b>.
@@ -4570,7 +4557,7 @@ public class PApplet extends Applet
 
 
 /**
- * @param what data to print to console
+ * @param what flipcard.data to print to console
  */
   static public void println(byte what) {
     System.out.println(what);
@@ -4613,7 +4600,7 @@ public class PApplet extends Applet
   }
 
   /**
-   * @param variables list of data, separated by commas
+   * @param variables list of flipcard.data, separated by commas
    */
   static public void println(Object... variables) {
 //    System.out.println("got " + variables.length + " variables");
@@ -5758,7 +5745,7 @@ public class PApplet extends Applet
    *
    * Loads an image into a variable of type <b>PImage</b>. Four types of
    * images ( <b>.gif</b>, <b>.jpg</b>, <b>.tga</b>, <b>.png</b>) images may
-   * be loaded. To load correctly, images must be located in the data
+   * be loaded. To load correctly, images must be located in the flipcard.data
    * directory of the current sketch. In most cases, load all images in
    * <b>setup()</b> to preload them at the start of the program. Loading
    * images inside <b>draw()</b> will reduce the speed of a program.<br/>
@@ -5779,10 +5766,10 @@ public class PApplet extends Applet
    * returned from <b>loadImage()</b> is null.<br/>
    * <br/> on the type of error, a <b>PImage</b> object may still be
    * returned, but the width and height of the image will be set to -1. This
-   * happens if bad image data is returned or cannot be decoded properly.
+   * happens if bad image flipcard.data is returned or cannot be decoded properly.
    * Sometimes this happens with image URLs that produce a 403 error or that
    * redirect to a password prompt, because <b>loadImage()</b> will attempt
-   * to interpret the HTML as image data.
+   * to interpret the HTML as image flipcard.data.
    *
    * ( end auto-generated )
    *
@@ -6300,7 +6287,7 @@ public class PApplet extends Applet
 
   /**
    * @webref input:files
-   * @param filename name of a file in the data folder or a URL.
+   * @param filename name of a file in the flipcard.data folder or a URL.
    * @see XML
    * @see PApplet#parseXML(String)
    * @see PApplet#saveXML(XML, String)
@@ -6377,7 +6364,7 @@ public class PApplet extends Applet
 
   /**
    * @webref input:files
-   * @param filename name of a file in the data folder or a URL
+   * @param filename name of a file in the flipcard.data folder or a URL
    * @see JSONObject
    * @see JSONArray
    * @see PApplet#loadJSONArray(String)
@@ -6419,7 +6406,7 @@ public class PApplet extends Applet
 
   /**
    * @webref input:files
-   * @param filename name of a file in the data folder or a URL
+   * @param filename name of a file in the flipcard.data folder or a URL
    * @see JSONObject
    * @see JSONArray
    * @see PApplet#loadJSONObject(String)
@@ -6468,7 +6455,7 @@ public class PApplet extends Applet
 
   /**
    * @webref input:files
-   * @param filename name of a file in the data folder or a URL.
+   * @param filename name of a file in the flipcard.data folder or a URL.
    * @see Table
    * @see PApplet#saveTable(Table, String)
    * @see PApplet#loadBytes(String)
@@ -6485,7 +6472,7 @@ public class PApplet extends Applet
    *
    * Another option is "dictionary=filename.tsv", which allows users to
    * specify a "dictionary" file that contains a mapping of the column titles
-   * and the data types used in the table file. This can be far more efficient
+   * and the flipcard.data types used in the table file. This can be far more efficient
    * (in terms of speed and memory usage) for loading and parsing tables. The
    * dictionary file can only be tab separated values (.tsv) and its extension
    * will be ignored. This option was added in Processing 2.0.2.
@@ -6560,23 +6547,23 @@ public class PApplet extends Applet
    * ( begin auto-generated from loadFont.xml )
    *
    * Loads a font into a variable of type <b>PFont</b>. To load correctly,
-   * fonts must be located in the data directory of the current sketch. To
+   * fonts must be located in the flipcard.data directory of the current sketch. To
    * create a font to use with Processing, select "Create Font..." from the
    * Tools menu. This will create a font in the format Processing requires
-   * and also adds it to the current sketch's data directory.<br />
+   * and also adds it to the current sketch's flipcard.data directory.<br />
    * <br />
-   * Like <b>loadImage()</b> and other functions that load data, the
+   * Like <b>loadImage()</b> and other functions that load flipcard.data, the
    * <b>loadFont()</b> function should not be used inside <b>draw()</b>,
    * because it will slow down the sketch considerably, as the font will be
    * re-loaded from the disk (or network) on each frame.<br />
    * <br />
    * For most renderers, Processing displays fonts using the .vlw font
    * format, which uses images for each letter, rather than defining them
-   * through vector data. When <b>hint(ENABLE_NATIVE_FONTS)</b> is used with
+   * through vector flipcard.data. When <b>hint(ENABLE_NATIVE_FONTS)</b> is used with
    * the JAVA2D renderer, the native version of a font will be used if it is
    * installed on the user's machine.<br />
    * <br />
-   * Using <b>createFont()</b> (instead of loadFont) enables vector data to
+   * Using <b>createFont()</b> (instead of loadFont) enables vector flipcard.data to
    * be used with the JAVA2D (default) renderer setting. This can be helpful
    * when many font sizes are needed, or when using any renderer based on
    * JAVA2D, such as the PDF library.
@@ -6629,7 +6616,7 @@ public class PApplet extends Applet
    *
    * Dynamically converts a font to the format used by Processing from either
    * a font name that's installed on the computer, or from a .ttf or .otf
-   * file inside the sketches "data" folder. This function is an advanced
+   * file inside the sketches "flipcard.data" folder. This function is an advanced
    * feature for precise control. On most occasions you should create fonts
    * through selecting "Create Font..." from the Tools menu.
    * <br /><br />
@@ -6638,7 +6625,7 @@ public class PApplet extends Applet
    * Because of limitations in Java, not all fonts can be used and some might
    * work with one operating system and not others. When sharing a sketch
    * with other people or posting it on the web, you may need to include a
-   * .ttf or .otf version of your font in the data directory of the sketch
+   * .ttf or .otf version of your font in the flipcard.data directory of the sketch
    * because other people might not have the font installed on their
    * computer. Only fonts that can legally be distributed should be included
    * with a sketch.
@@ -7132,13 +7119,13 @@ public class PApplet extends Applet
    *
    * This is a function for advanced programmers to open a Java InputStream.
    * It's useful if you want to use the facilities provided by PApplet to
-   * easily open files from the data folder or from a URL, but want an
+   * easily open files from the flipcard.data folder or from a URL, but want an
    * InputStream object so that you can use other parts of Java to take more
    * control of how the stream is read.<br />
    * <br />
    * The filename passed in can be:<br />
    * - A URL, for instance <b>openStream("http://processing.org/")</b><br />
-   * - A file in the sketch's <b>data</b> folder<br />
+   * - A file in the sketch's <b>flipcard.data</b> folder<br />
    * - The full path to a file to be opened locally (when running as an
    * application)<br />
    * <br />
@@ -7163,15 +7150,15 @@ public class PApplet extends Applet
    * Simplified method to open a Java InputStream.
    * <p>
    * This method is useful if you want to use the facilities provided
-   * by PApplet to easily open things from the data folder or from a URL,
+   * by PApplet to easily open things from the flipcard.data folder or from a URL,
    * but want an InputStream object so that you can use other Java
    * methods to take more control of how the stream is read.
    * <p>
    * If the requested item doesn't exist, null is returned.
    * (Prior to 0096, die() would be called, killing the applet)
    * <p>
-   * For 0096+, the "data" folder is exported intact with subfolders,
-   * and openStream() properly handles subdirectories from the data folder
+   * For 0096+, the "flipcard.data" folder is exported intact with subfolders,
+   * and openStream() properly handles subdirectories from the flipcard.data folder
    * <p>
    * If not online, this will also check to see if the user is asking
    * for a file whose name isn't properly capitalized. This helps prevent
@@ -7180,13 +7167,13 @@ public class PApplet extends Applet
    * case sensitivity is preserved but ignored.
    * <p>
    * It is strongly recommended that libraries use this method to open
-   * data files, so that the loading sequence is handled in the same way
+   * flipcard.data files, so that the loading sequence is handled in the same way
    * as functions like loadBytes(), loadImage(), etc.
    * <p>
    * The filename passed in can be:
    * <UL>
    * <LI>A URL, for instance openStream("http://processing.org/");
-   * <LI>A file in the sketch's data folder
+   * <LI>A file in the sketch's flipcard.data folder
    * <LI>Another file to be opened locally (when running as an application)
    * </UL>
    *
@@ -7253,7 +7240,7 @@ public class PApplet extends Applet
     // calling getResourceAsStream() on a directory lists its contents.
     // http://dev.processing.org/bugs/show_bug.cgi?id=716
     try {
-      // First see if it's in a data folder. This may fail by throwing
+      // First see if it's in a flipcard.data folder. This may fail by throwing
       // a SecurityException. If so, this whole block will be skipped.
       File file = new File(dataPath(filename));
       if (!file.exists()) {
@@ -7299,9 +7286,9 @@ public class PApplet extends Applet
     // the jar, rather than trying to dig into the package location)
     ClassLoader cl = getClass().getClassLoader();
 
-    // by default, data files are exported to the root path of the jar.
-    // (not the data folder) so check there first.
-    stream = cl.getResourceAsStream("data/" + filename);
+    // by default, flipcard.data files are exported to the root path of the jar.
+    // (not the flipcard.data folder) so check there first.
+    stream = cl.getResourceAsStream("flipcard/data/" + filename);
     if (stream != null) {
       String cn = stream.getClass().getName();
       // this is an irritation of sun's java plug-in, which will return
@@ -7314,7 +7301,7 @@ public class PApplet extends Applet
     }
 
     // When used with an online script, also need to check without the
-    // data folder, in case it's not in a subfolder called 'data'.
+    // flipcard.data folder, in case it's not in a subfolder called 'flipcard.data'.
     // http://dev.processing.org/bugs/show_bug.cgi?id=389
     stream = cl.getResourceAsStream(filename);
     if (stream != null) {
@@ -7342,11 +7329,11 @@ public class PApplet extends Applet
       }
     } catch (Exception e) { }  // IO or NPE or...
 
-    // Now try it with a 'data' subfolder. getting kinda desperate for data...
+    // Now try it with a 'flipcard.data' subfolder. getting kinda desperate for flipcard.data...
     try {
       URL base = getDocumentBase();
       if (base != null) {
-        URL url = new URL(base, "data/" + filename);
+        URL url = new URL(base, "flipcard/data/" + filename);
         URLConnection conn = url.openConnection();
         return conn.getInputStream();
       }
@@ -7407,7 +7394,7 @@ public class PApplet extends Applet
    * ( begin auto-generated from loadBytes.xml )
    *
    * Reads the contents of a file or url and places it in a byte array. If a
-   * file is specified, it must be located in the sketch's "data"
+   * file is specified, it must be located in the sketch's "flipcard.data"
    * directory/folder.<br />
    * <br />
    * The filename parameter can also be a URL to a file found online. For
@@ -7418,7 +7405,7 @@ public class PApplet extends Applet
    *
    * ( end auto-generated )
    * @webref input:files
-   * @param filename name of a file in the data folder or a URL.
+   * @param filename name of a file in the flipcard.data folder or a URL.
    * @see PApplet#loadStrings(String)
    * @see PApplet#saveStrings(String, String[])
    * @see PApplet#saveBytes(String, byte[])
@@ -7495,7 +7482,7 @@ public class PApplet extends Applet
    *
    * Reads the contents of a file or url and creates a String array of its
    * individual lines. If a file is specified, it must be located in the
-   * sketch's "data" directory/folder.<br />
+   * sketch's "flipcard.data" directory/folder.<br />
    * <br />
    * The filename parameter can also be a URL to a file found online. For
    * security reasons, a Processing sketch found online can only download
@@ -7517,7 +7504,7 @@ public class PApplet extends Applet
    * ( end auto-generated )
    *
    * <h3>Advanced</h3>
-   * Load data from a file and shove it into a String array.
+   * Load flipcard.data from a file and shove it into a String array.
    * <p>
    * Exceptions are handled internally, when an error, occurs, an
    * exception is printed to the console and 'null' is returned,
@@ -7747,7 +7734,7 @@ public class PApplet extends Applet
    * ( begin auto-generated from saveBytes.xml )
    *
    * Opposite of <b>loadBytes()</b>, will write an entire array of bytes to a
-   * file. The data is saved in binary format. This file is saved to the
+   * file. The flipcard.data is saved in binary format. This file is saved to the
    * sketch's folder, which is opened by selecting "Show sketch folder" from
    * the "Sketch" menu.<br />
    * <br />
@@ -7923,13 +7910,13 @@ public class PApplet extends Applet
    * but creates any in-between folders so that things save properly.
    * <p/>
    * All saveXxxx() functions use the path to the sketch folder, rather than
-   * its data folder. Once exported, the data folder will be found inside the
+   * its flipcard.data folder. Once exported, the flipcard.data folder will be found inside the
    * jar file of the exported application or applet. In this case, it's not
-   * possible to save data into the jar file, because it will often be running
+   * possible to save flipcard.data into the jar file, because it will often be running
    * from a server, or marked in-use if running from a local file system.
-   * With this in mind, saving to the data path doesn't make sense anyway.
-   * If you know you're running locally, and want to save to the data folder,
-   * use <TT>saveXxxx("data/blah.dat")</TT>.
+   * With this in mind, saving to the flipcard.data path doesn't make sense anyway.
+   * If you know you're running locally, and want to save to the flipcard.data folder,
+   * use <TT>saveXxxx("flipcard.data/blah.dat")</TT>.
    */
   public String savePath(String where) {
     if (where == null) return null;
@@ -7974,18 +7961,18 @@ public class PApplet extends Applet
 
 
   /**
-   * Return a full path to an item in the data folder.
+   * Return a full path to an item in the flipcard.data folder.
    * <p>
    * This is only available with applications, not applets or Android.
-   * On Windows and Linux, this is simply the data folder, which is located
+   * On Windows and Linux, this is simply the flipcard.data folder, which is located
    * in the same directory as the EXE file and lib folders. On Mac OS X, this
-   * is a path to the data folder buried inside Contents/Java.
-   * For the latter point, that also means that the data folder should not be
+   * is a path to the flipcard.data folder buried inside Contents/Java.
+   * For the latter point, that also means that the flipcard.data folder should not be
    * considered writable. Use sketchPath() for now, or inputPath() and
    * outputPath() once they're available in the 2.0 release.
    * <p>
-   * dataPath() is not supported with applets because applets have their data
-   * folder wrapped into the JAR file. To read data from the data folder that
+   * dataPath() is not supported with applets because applets have their flipcard.data
+   * folder wrapped into the JAR file. To read flipcard.data from the flipcard.data folder that
    * works with an applet, you should use other methods such as createInput(),
    * createReader(), or loadStrings().
    */
@@ -7995,7 +7982,7 @@ public class PApplet extends Applet
 
 
   /**
-   * Return a full path to an item in the data folder as a File object.
+   * Return a full path to an item in the flipcard.data folder as a File object.
    * See the dataPath() method for more information.
    */
   public File dataFile(String where) {
@@ -8010,17 +7997,17 @@ public class PApplet extends Applet
       // The path will be URL encoded (%20 for spaces) coming from above
       // http://code.google.com/p/processing/issues/detail?id=1073
       File containingFolder = new File(urlDecode(jarPath)).getParentFile();
-      File dataFolder = new File(containingFolder, "data");
+      File dataFolder = new File(containingFolder, "flipcard/data");
       return new File(dataFolder, where);
     }
     // Windows, Linux, or when not using a Mac OS X .app file
-    return new File(sketchPath + File.separator + "data" + File.separator + where);
+    return new File(sketchPath + File.separator + "flipcard/data" + File.separator + where);
   }
 
 
   /**
-   * On Windows and Linux, this is simply the data folder. On Mac OS X, this is
-   * the path to the data folder buried inside Contents/Java
+   * On Windows and Linux, this is simply the flipcard.data folder. On Mac OS X, this is
+   * the path to the flipcard.data folder buried inside Contents/Java
    */
 //  public File inputFile(String where) {
 //  }
@@ -8116,7 +8103,7 @@ public class PApplet extends Applet
    * is case insensitive.-->
    *
    * ( end auto-generated )
-   * @webref data:array_functions
+   * @webref flipcard.data:array_functions
    * @param list array to sort
    * @see PApplet#reverse(boolean[])
    */
@@ -8195,14 +8182,14 @@ public class PApplet extends Applet
    * <b>length</b>. The simplified version with two arguments copies an
    * entire array to another of the same size. It is equivalent to
    * "arrayCopy(src, 0, dst, 0, src.length)". This function is far more
-   * efficient for copying array data than iterating through a <b>for</b> and
+   * efficient for copying array flipcard.data than iterating through a <b>for</b> and
    * copying each element.
    *
    * ( end auto-generated )
-   * @webref data:array_functions
+   * @webref flipcard.data:array_functions
    * @param src the source array
    * @param srcPosition starting position in the source array
-   * @param dst the destination array of the same data type as the source array
+   * @param dst the destination array of the same flipcard.data type as the source array
    * @param dstPosition starting position in the destination array
    * @param length number of array elements to be copied
    * @see PApplet#concat(boolean[], boolean[])
@@ -8261,13 +8248,13 @@ public class PApplet extends Applet
    * size of the array, but the optional <b>newSize</b> parameter provides
    * precise control over the increase in size.
    * <br/> <br/>
-   * When using an array of objects, the data returned from the function must
-   * be cast to the object array's data type. For example: <em>SomeClass[]
+   * When using an array of objects, the flipcard.data returned from the function must
+   * be cast to the object array's flipcard.data type. For example: <em>SomeClass[]
    * items = (SomeClass[]) expand(originalArray)</em>.
    *
    * ( end auto-generated )
    *
-   * @webref data:array_functions
+   * @webref flipcard.data:array_functions
    * @param list the array to expand
    * @see PApplet#shorten(boolean[])
    */
@@ -8376,19 +8363,19 @@ public class PApplet extends Applet
   /**
    * ( begin auto-generated from append.xml )
    *
-   * Expands an array by one element and adds data to the new position. The
+   * Expands an array by one element and adds flipcard.data to the new position. The
    * datatype of the <b>element</b> parameter must be the same as the
    * datatype of the array.
    * <br/> <br/>
-   * When using an array of objects, the data returned from the function must
-   * be cast to the object array's data type. For example: <em>SomeClass[]
+   * When using an array of objects, the flipcard.data returned from the function must
+   * be cast to the object array's flipcard.data type. For example: <em>SomeClass[]
    * items = (SomeClass[]) append(originalArray, element)</em>.
    *
    * ( end auto-generated )
    *
-   * @webref data:array_functions
+   * @webref flipcard.data:array_functions
    * @param array array to append
-   * @param value new data for the array
+   * @param value new flipcard.data for the array
    * @see PApplet#shorten(boolean[])
    * @see PApplet#expand(boolean[])
    */
@@ -8435,13 +8422,13 @@ public class PApplet extends Applet
    *
    * Decreases an array by one element and returns the shortened array.
    * <br/> <br/>
-   * When using an array of objects, the data returned from the function must
-   * be cast to the object array's data type. For example: <em>SomeClass[]
+   * When using an array of objects, the flipcard.data returned from the function must
+   * be cast to the object array's flipcard.data type. For example: <em>SomeClass[]
    * items = (SomeClass[]) shorten(originalArray)</em>.
    *
    * ( end auto-generated )
    *
-   * @webref data:array_functions
+   * @webref flipcard.data:array_functions
    * @param list array to shorten
    * @see PApplet#append(byte[], byte)
    * @see PApplet#expand(boolean[])
@@ -8482,17 +8469,17 @@ public class PApplet extends Applet
    * Inserts a value or array of values into an existing array. The first two
    * parameters must be of the same datatype. The <b>array</b> parameter
    * defines the array which will be modified and the second parameter
-   * defines the data which will be inserted.
+   * defines the flipcard.data which will be inserted.
    * <br/> <br/>
-   * When using an array of objects, the data returned from the function must
-   * be cast to the object array's data type. For example: <em>SomeClass[]
+   * When using an array of objects, the flipcard.data returned from the function must
+   * be cast to the object array's flipcard.data type. For example: <em>SomeClass[]
    * items = (SomeClass[]) splice(array1, array2, index)</em>.
    *
    * ( end auto-generated )
-   * @webref data:array_functions
+   * @webref flipcard.data:array_functions
    * @param list array to splice into
    * @param value value to be spliced in
-   * @param index position in the array from which to insert data
+   * @param index position in the array from which to insert flipcard.data
    * @see PApplet#concat(boolean[], boolean[])
    * @see PApplet#subset(boolean[], int, int)
    */
@@ -8654,12 +8641,12 @@ public class PApplet extends Applet
    * <b>offset</b> remember the first array element is 0. This function does
    * not change the source array.
    * <br/> <br/>
-   * When using an array of objects, the data returned from the function must
-   * be cast to the object array's data type. For example: <em>SomeClass[]
+   * When using an array of objects, the flipcard.data returned from the function must
+   * be cast to the object array's flipcard.data type. For example: <em>SomeClass[]
    * items = (SomeClass[]) subset(originalArray, 0, 4)</em>.
    *
    * ( end auto-generated )
-  * @webref data:array_functions
+  * @webref flipcard.data:array_functions
   * @param list array to extract from
   * @param start position to begin
   * @param count number of values to extract
@@ -8744,12 +8731,12 @@ public class PApplet extends Applet
    * } and the array { 4, 5, 6 } yields { 1, 2, 3, 4, 5, 6 }. Both parameters
    * must be arrays of the same datatype.
    * <br/> <br/>
-   * When using an array of objects, the data returned from the function must
-   * be cast to the object array's data type. For example: <em>SomeClass[]
+   * When using an array of objects, the flipcard.data returned from the function must
+   * be cast to the object array's flipcard.data type. For example: <em>SomeClass[]
    * items = (SomeClass[]) concat(array1, array2)</em>.
    *
    * ( end auto-generated )
-  * @webref data:array_functions
+  * @webref flipcard.data:array_functions
   * @param a first array to concatenate
   * @param b second array to concatenate
   * @see PApplet#splice(boolean[], boolean, int)
@@ -8816,7 +8803,7 @@ public class PApplet extends Applet
    * Reverses the order of an array.
    *
    * ( end auto-generated )
-  * @webref data:array_functions
+  * @webref flipcard.data:array_functions
   * @param list booleans[], bytes[], chars[], ints[], floats[], or Strings[]
   * @see PApplet#sort(String[], int)
   */
@@ -8899,7 +8886,7 @@ public class PApplet extends Applet
    * return, and tab, this function also removes the Unicode "nbsp" character.
    *
    * ( end auto-generated )
-   * @webref data:string_functions
+   * @webref flipcard.data:string_functions
    * @param str any string
    * @see PApplet#split(String, String)
    * @see PApplet#join(String[], char)
@@ -8932,7 +8919,7 @@ public class PApplet extends Applet
    * <b>nf()</b> or <b>nfs()</b>.
    *
    * ( end auto-generated )
-   * @webref data:string_functions
+   * @webref flipcard.data:string_functions
    * @param list array of Strings
    * @param separator char or String to be placed between each item
    * @see PApplet#split(String, String)
@@ -8974,7 +8961,7 @@ public class PApplet extends Applet
    * <b>int()</b> and <b>float()</b> to convert the array of Strings.
    *
    * ( end auto-generated )
-   * @webref data:string_functions
+   * @webref flipcard.data:string_functions
    * @param value the String to be split
    * @param delim list of individual characters that will be used as separators
    * @see PApplet#split(String, String)
@@ -9022,10 +9009,10 @@ public class PApplet extends Applet
    * -->
    *
    * ( end auto-generated )
-   * @webref data:string_functions
+   * @webref flipcard.data:string_functions
    * @usage web_application
    * @param value the String to be split
-   * @param delim the character or String used to separate the data
+   * @param delim the character or String used to separate the flipcard.data
    */
   static public String[] split(String value, char delim) {
     // do this so that the exception occurs inside the user's
@@ -9135,7 +9122,7 @@ public class PApplet extends Applet
    * Tutorial</a> on the topic.
    *
    * ( end auto-generated )
-   * @webref data:string_functions
+   * @webref flipcard.data:string_functions
    * @param str the String to be searched
    * @param regexp the regexp to be used for matching
    * @see PApplet#matchAll(String, String)
@@ -9186,7 +9173,7 @@ public class PApplet extends Applet
    * Tutorial</a> on the topic.
    *
    * ( end auto-generated )
-   * @webref data:string_functions
+   * @webref flipcard.data:string_functions
    * @param str the String to be searched
    * @param regexp the regexp to be used for matching
    * @see PApplet#match(String, String)
@@ -9753,7 +9740,7 @@ public class PApplet extends Applet
    * functions.
    *
    * ( end auto-generated )
-   * @webref data:string_functions
+   * @webref flipcard.data:string_functions
    * @param num the number(s) to format
    * @param digits number of digits to pad with zero
    * @see PApplet#nfs(float, int, int)
@@ -9788,7 +9775,7 @@ public class PApplet extends Applet
    * whatever is apprioriate for that region.
    *
    * ( end auto-generated )
- * @webref data:string_functions
+ * @webref flipcard.data:string_functions
  * @param num the number(s) to format
  * @see PApplet#nf(float, int, int)
  * @see PApplet#nfp(float, int, int)
@@ -9843,7 +9830,7 @@ public class PApplet extends Applet
    * should always be positive integers.
    *
    * ( end auto-generated )
-  * @webref data:string_functions
+  * @webref flipcard.data:string_functions
   * @param num the number(s) to format
   * @param digits number of digits to pad with zeroes
   * @see PApplet#nf(float, int, int)
@@ -9879,7 +9866,7 @@ public class PApplet extends Applet
    * <b>left</b>, and <b>right</b> parameters should always be positive integers.
    *
    * ( end auto-generated )
-  * @webref data:string_functions
+  * @webref flipcard.data:string_functions
   * @param num the number(s) to format
   * @param digits number of digits to pad with zeroes
   * @see PApplet#nf(float, int, int)
@@ -10031,7 +10018,7 @@ public class PApplet extends Applet
    * simply shorten the string to eight anyway.
    *
    * ( end auto-generated )
-   * @webref data:conversion
+   * @webref flipcard.data:conversion
    * @param value the value to convert
    * @see PApplet#unhex(String)
    * @see PApplet#binary(byte)
@@ -10075,7 +10062,7 @@ public class PApplet extends Applet
    *
    * ( end auto-generated )
    *
-   * @webref data:conversion
+   * @webref flipcard.data:conversion
    * @param value String to convert to an integer
    * @see PApplet#hex(int, int)
    * @see PApplet#binary(byte)
@@ -10132,7 +10119,7 @@ public class PApplet extends Applet
    * shorten the string to 32 anyway.
    *
    * ( end auto-generated )
-  * @webref data:conversion
+  * @webref flipcard.data:conversion
   * @param value value to convert
   * @param digits number of digits to return
   * @see PApplet#unbinary(String)
@@ -10164,7 +10151,7 @@ public class PApplet extends Applet
    * integer value. For example, unbinary("00001000") will return 8.
    *
    * ( end auto-generated )
-   * @webref data:conversion
+   * @webref flipcard.data:conversion
    * @param value String to convert to an integer
    * @see PApplet#binary(byte)
    * @see PApplet#hex(int,int)
@@ -11139,8 +11126,8 @@ public class PApplet extends Applet
   /**
    * ( begin auto-generated from beginRaw.xml )
    *
-   * To create vectors from 3D data, use the <b>beginRaw()</b> and
-   * <b>endRaw()</b> commands. These commands will grab the shape data just
+   * To create vectors from 3D flipcard.data, use the <b>beginRaw()</b> and
+   * <b>endRaw()</b> commands. These commands will grab the shape flipcard.data just
    * before it is rendered to the screen. At this stage, your entire scene is
    * nothing but a long list of individual lines and triangles. This means
    * that a shape created with <b>sphere()</b> function will be made up of
@@ -11184,7 +11171,7 @@ public class PApplet extends Applet
 
   /**
    * @nowebref
-   * Begin recording raw shape data to the specified renderer.
+   * Begin recording raw shape flipcard.data to the specified renderer.
    *
    * This simply echoes to g.beginRaw(), but since is placed here (rather than
    * generated by preproc.pl) for clarity and so that it doesn't echo the
@@ -11229,7 +11216,7 @@ public class PApplet extends Applet
   /**
    * ( begin auto-generated from loadPixels.xml )
    *
-   * Loads the pixel data for the display window into the <b>pixels[]</b>
+   * Loads the pixel flipcard.data for the display window into the <b>pixels[]</b>
    * array. This function must always be called before reading from or
    * writing to <b>pixels[]</b>.
    * <br/><br/> renderers may or may not seem to require <b>loadPixels()</b>
@@ -11258,7 +11245,7 @@ public class PApplet extends Applet
  /**
    * ( begin auto-generated from updatePixels.xml )
    *
-   * Updates the display window with the data in the <b>pixels[]</b> array.
+   * Updates the display window with the flipcard.data in the <b>pixels[]</b> array.
    * Use in conjunction with <b>loadPixels()</b>. If you're only reading
    * pixels from the array, there's no need to call <b>updatePixels()</b>
    * unless there are changes.
@@ -11304,10 +11291,10 @@ public class PApplet extends Applet
 
 
   /**
-   * Store data of some kind for the renderer that requires extra metadata of
+   * Store flipcard.data of some kind for the renderer that requires extra metadata of
    * some kind. Usually this is a renderer-specific representation of the
-   * image data, for instance a BufferedImage with tint() settings applied for
-   * PGraphicsJava2D, or resized image data and OpenGL texture indices for
+   * image flipcard.data, for instance a BufferedImage with tint() settings applied for
+   * PGraphicsJava2D, or resized image flipcard.data and OpenGL texture indices for
    * PGraphicsOpenGL.
    * @param renderer The PGraphics renderer associated to the image
    * @param storage The metadata required by the renderer
@@ -11319,8 +11306,8 @@ public class PApplet extends Applet
 
 
   /**
-   * Get cache storage data for the specified renderer. Because each renderer
-   * will cache data in different formats, it's necessary to store cache data
+   * Get cache storage flipcard.data for the specified renderer. Because each renderer
+   * will cache flipcard.data in different formats, it's necessary to store cache flipcard.data
    * keyed by the renderer object. Otherwise, attempting to draw the same
    * image to both a PGraphicsJava2D and a PGraphicsOpenGL will cause errors.
    * @param renderer The PGraphics renderer associated to the image
@@ -11333,7 +11320,7 @@ public class PApplet extends Applet
 
   /**
    * Remove information associated with this renderer from the cache, if any.
-   * @param renderer The PGraphics renderer whose cache data should be removed
+   * @param renderer The PGraphics renderer whose cache flipcard.data should be removed
    */
   public void removeCache(PImage image) {
     if (recorder != null) recorder.removeCache(image);
@@ -11624,7 +11611,7 @@ public class PApplet extends Applet
    *
    * The <b>endShape()</b> function is the companion to <b>beginShape()</b>
    * and may only be called after <b>beginShape()</b>. When <b>endshape()</b>
-   * is called, all of image data defined since the previous call to
+   * is called, all of image flipcard.data defined since the previous call to
    * <b>beginShape()</b> is written into the image buffer. The constant CLOSE
    * as the value for the MODE parameter to close the shape (to connect the
    * beginning and the end).
@@ -12734,7 +12721,7 @@ public class PApplet extends Applet
   /**
    * ( begin auto-generated from image.xml )
    *
-   * Displays images to the screen. The images must be in the sketch's "data"
+   * Displays images to the screen. The images must be in the sketch's "flipcard.data"
    * directory to load correctly. Select "Add file..." from the "Sketch" menu
    * to add the image. Processing currently works with GIF, JPEG, and Targa
    * images. The <b>img</b> parameter specifies the image to display and the
@@ -12837,7 +12824,7 @@ public class PApplet extends Applet
   /**
    * ( begin auto-generated from shape.xml )
    *
-   * Displays shapes to the screen. The shapes must be in the sketch's "data"
+   * Displays shapes to the screen. The shapes must be in the sketch's "flipcard.data"
    * directory to load correctly. Select "Add file..." from the "Sketch" menu
    * to add the shape. Processing currently works with SVG shapes only. The
    * <b>sh</b> parameter specifies the shape to display and the <b>x</b> and
@@ -12982,7 +12969,7 @@ public class PApplet extends Applet
    * /><br /> With the default (JAVA2D) and PDF renderers, it's also possible
    * to enable the use of native fonts via the command
    * <b>hint(ENABLE_NATIVE_FONTS)</b>. This will produce vector text in
-   * JAVA2D sketches and PDF output in cases where the vector data is
+   * JAVA2D sketches and PDF output in cases where the vector flipcard.data is
    * available: when the font is still installed, or the font is created via
    * the <b>createFont()</b> function (rather than the Create Font tool).
    *
@@ -13049,7 +13036,7 @@ public class PApplet extends Applet
    * The <b>textMode(SHAPE)</b> option in <b>P3D</b> can be combined with
    * <b>beginRaw()</b> to write vector-accurate text to 2D and 3D output
    * files, for instance <b>DXF</b> or <b>PDF</b>. The <b>SHAPE</b> mode is
-   * not currently optimized for <b>P3D</b>, so if recording shape data, use
+   * not currently optimized for <b>P3D</b>, so if recording shape flipcard.data, use
    * <b>textMode(MODEL)</b> until you're ready to capture the geometry with <b>beginRaw()</b>.
    *
    * ( end auto-generated )
@@ -13129,7 +13116,7 @@ public class PApplet extends Applet
    * ( begin auto-generated from text.xml )
    *
    * Draws text to the screen. Displays the information specified in the
-   * <b>data</b> or <b>stringdata</b> parameters on the screen in the
+   * <b>flipcard.data</b> or <b>stringdata</b> parameters on the screen in the
    * position specified by the <b>x</b> and <b>y</b> parameters and the
    * optional <b>z</b> parameter. A default font will be used unless a font
    * is set with the <b>textFont()</b> function. Change the color of the text
@@ -13138,7 +13125,7 @@ public class PApplet extends Applet
    * right, and center of the coordinates.
    * <br /><br />
    * The <b>x2</b> and <b>y2</b> parameters define a rectangular area to
-   * display within and may only be used with string data. For text drawn
+   * display within and may only be used with string flipcard.data. For text drawn
    * inside a rectangle, the coordinates are interpreted based on the current
    * <b>rectMode()</b> setting.
    *
@@ -14388,7 +14375,7 @@ public class PApplet extends Applet
    * CSS). When using the hexadecimal notation starting with "0x", the
    * hexadecimal value must be specified with eight characters; the first two
    * characters define the alpha component and the remainder the red, green,
-   * and blue components.
+   * and blue flipcard.components.
    * <br/> <br/>
    * The value for the parameter "gray" must be less than or equal to the
    * current maximum value as specified by <b>colorMode()</b>. The default
@@ -14491,7 +14478,7 @@ public class PApplet extends Applet
    * CSS). When using the hexadecimal notation starting with "0x", the
    * hexadecimal value must be specified with eight characters; the first two
    * characters define the alpha component and the remainder the red, green,
-   * and blue components.<br />
+   * and blue flipcard.components.<br />
    * <br />
    * The value for the parameter "gray" must be less than or equal to the
    * current maximum value as specified by <b>colorMode()</b>. The default
@@ -14590,7 +14577,7 @@ public class PApplet extends Applet
    * CSS). When using the hexadecimal notation starting with "0x", the
    * hexadecimal value must be specified with eight characters; the first two
    * characters define the alpha component and the remainder the red, green,
-   * and blue components.
+   * and blue flipcard.components.
    * <br/> <br/>
    * The value for the parameter "gray" must be less than or equal to the
    * current maximum value as specified by <b>colorMode()</b>. The default
@@ -14662,7 +14649,7 @@ public class PApplet extends Applet
    *
    * Sets the ambient reflectance for shapes drawn to the screen. This is
    * combined with the ambient light component of environment. The color
-   * components set through the parameters define the reflectance. For
+   * flipcard.components set through the parameters define the reflectance. For
    * example in the default color mode, setting v1=255, v2=126, v3=0, would
    * cause all the red light to reflect and half of the green light to
    * reflect. Used in combination with <b>emissive()</b>, <b>specular()</b>,
@@ -15179,7 +15166,7 @@ public class PApplet extends Applet
    * Use image.resize(width, height) to make short work of such a task.<br/>
    * <br/>
    * Note that even if the image is set as RGB, the high 8 bits of each pixel
-   * should be set opaque (0xFF000000) because the image data will be copied
+   * should be set opaque (0xFF000000) because the image flipcard.data will be copied
    * directly to the screen, and non-opaque background images may have strange
    * behavior. Use image.filter(OPAQUE) to handle this easily.<br/>
    * <br/>
@@ -15196,7 +15183,7 @@ public class PApplet extends Applet
   /**
    * ( begin auto-generated from colorMode.xml )
    *
-   * Changes the way Processing interprets color data. By default, the
+   * Changes the way Processing interprets color flipcard.data. By default, the
    * parameters for <b>fill()</b>, <b>stroke()</b>, <b>background()</b>, and
    * <b>color()</b> are defined by values between 0 and 255 using the RGB
    * color model. The <b>colorMode()</b> function is used to change the
@@ -15342,7 +15329,7 @@ public class PApplet extends Applet
    * function is easy to use and undestand, but is slower than another
    * technique. To achieve the same results when working in <b>colorMode(RGB,
    * 255)</b>, but with greater speed, use a bit mask to remove the other
-   * color components. For example, the following two lines of code are
+   * color flipcard.components. For example, the following two lines of code are
    * equivalent:<br /><pre>float r1 = blue(myColor);<br />float r2 = myColor
    * &amp; 0xFF;</pre>
    *
@@ -15455,7 +15442,7 @@ public class PApplet extends Applet
   /**
    * @nowebref
    * Interpolate between two colors. Like lerp(), but for the
-   * individual color components of a color supplied as an int value.
+   * individual color flipcard.components of a color supplied as an int value.
    */
   static public int lerpColor(int c1, int c2, float amt, int mode) {
     return PGraphics.lerpColor(c1, c2, amt, mode);
@@ -15548,7 +15535,7 @@ public class PApplet extends Applet
    * numbers returned will be in RGB format.<br />
    * <br />
    * Getting the color of a single pixel with <b>get(x, y)</b> is easy, but
-   * not as fast as grabbing the data directly from <b>pixels[]</b>. The
+   * not as fast as grabbing the flipcard.data directly from <b>pixels[]</b>. The
    * equivalent statement to <b>get(x, y)</b> using <b>pixels[]</b> is
    * <b>pixels[y*width+x]</b>. See the reference for <b>pixels[]</b> for more information.
    *
@@ -15617,7 +15604,7 @@ public class PApplet extends Applet
    * the current <b>imageMode()</b>.
    * <br /><br />
    * Setting the color of a single pixel with <b>set(x, y)</b> is easy, but
-   * not as fast as putting the data directly into <b>pixels[]</b>. The
+   * not as fast as putting the flipcard.data directly into <b>pixels[]</b>. The
    * equivalent statement to <b>set(x, y, #000000)</b> using <b>pixels[]</b>
    * is <b>pixels[y*width+x] = #000000</b>. See the reference for
    * <b>pixels[]</b> for more information.
@@ -15659,14 +15646,14 @@ public class PApplet extends Applet
    *
    * Masks part of an image from displaying by loading another image and
    * using it as an alpha channel. This mask image should only contain
-   * grayscale data, but only the blue color channel is used. The mask image
+   * grayscale flipcard.data, but only the blue color channel is used. The mask image
    * needs to be the same size as the image to which it is applied.<br />
    * <br />
    * In addition to using a mask image, an integer array containing the alpha
-   * channel data can be specified directly. This method is useful for
+   * channel flipcard.data can be specified directly. This method is useful for
    * creating dynamically generated alpha masks. This array must be of the
    * same length as the target image's pixels array and should contain only
-   * grayscale data of values between 0-255.
+   * grayscale flipcard.data of values between 0-255.
    *
    * ( end auto-generated )
    *
@@ -15736,7 +15723,7 @@ public class PApplet extends Applet
    * <UL>
    * <LI>filter(BLUR) provides a basic blur.
    * <LI>filter(GRAY) converts the image to grayscale based on luminance.
-   * <LI>filter(INVERT) will invert the color components in the image.
+   * <LI>filter(INVERT) will invert the color flipcard.components in the image.
    * <LI>filter(OPAQUE) set all the high bits in the image to opaque
    * <LI>filter(THRESHOLD) converts the image to black and white.
    * <LI>filter(DILATE) grow white/light areas

@@ -1,14 +1,15 @@
 
+
+REFACTOR:
+_ rename and refactor structure
+_ file with constants
+_ change pApplet to flipcard.Flipcard
+
 BUTTONS:
 _ effect when pressing (add)
 _ effect when pressing (menu)
 _ (save) (shuffle) (learned) effects
 _ effects on (delete), (edit), (learned)
-
-REFACTOR:
-_ rename and refactor structure
-_ file with constants
-_ change pApplet to Rotation3D
 
 _ show (toStart) only when needed
 _ right animation in menu items

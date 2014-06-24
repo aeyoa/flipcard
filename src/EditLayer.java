@@ -20,9 +20,9 @@ public class EditLayer {
     private static final String removeButtonFilename = "remove.png";
     private static final String editButtonFilename = "edit.png";
     private static final String learnedButtonFilename = "learned.png";
-    private final RoundButton removeButton;
-    private final RoundButton editButton;
-    private final RoundButton learnedButton;
+    private final Button removeButton;
+    private final Button editButton;
+    private final Button learnedButton;
     private static final int buttonsY = 20;
 
     private final PApplet pApplet;
@@ -36,9 +36,9 @@ public class EditLayer {
         this.card = card;
         this.activate();
         justCreated = true;
-        removeButton = new RoundButton(pApplet, pApplet.loadImage(removeButtonFilename), -50, CARD_BOTTOM_Y - buttonsY);
-        editButton = new RoundButton(pApplet, pApplet.loadImage(editButtonFilename), 0, CARD_BOTTOM_Y - buttonsY);
-        learnedButton = new RoundButton(pApplet, pApplet.loadImage(learnedButtonFilename), 50, CARD_BOTTOM_Y - buttonsY);
+        removeButton = new Button(pApplet, pApplet.loadImage(removeButtonFilename), -50, CARD_BOTTOM_Y - buttonsY);
+        editButton = new Button(pApplet, pApplet.loadImage(editButtonFilename), 0, CARD_BOTTOM_Y - buttonsY);
+        learnedButton = new Button(pApplet, pApplet.loadImage(learnedButtonFilename), 50, CARD_BOTTOM_Y - buttonsY);
     }
 
     public void display() {
