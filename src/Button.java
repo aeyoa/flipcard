@@ -74,6 +74,14 @@ public class Button {
         isToggleButton = true;
     }
 
+    public void setHoverColor(final int hoverColor) {
+        this.hoverColor = hoverColor;
+    }
+
+    public void setDefaultColor(final int defaultColor) {
+        this.defaultColor = defaultColor;
+    }
+
     /* Invoked when mousePressed */
     public boolean isPressed() {
         if (mouseOver()) {

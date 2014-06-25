@@ -1,9 +1,7 @@
 
-
 REFACTOR:
 _ rename and refactor structure
 _ file with constants
-_ change pApplet to flipcard.Flipcard
 
 BUTTONS:
 _ effect when pressing (add)
@@ -41,3 +39,5 @@ _ add (left) and (right) buttons
 + can't create feature when empty card on screen
 + associate file extension with app and icon
 
+X change pApplet to Flipcard
+X add delay after card creation before edit layer appears

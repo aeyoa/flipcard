@@ -10,10 +10,7 @@ public class EditLayer {
     private static final int HEIGHT_THRESHOLD = 30;
     private static final double EASING = 0.1;
     private static final double DELTA = 0.05;
-    private static final int CARD_WIDTH = 400;
     private static final int CARD_HEIGHT = 200;
-    private static final int CARD_LEFT_BOTTOM_X = -(CARD_WIDTH / 2);
-    private static final int CARD_RIGHT_BOTTOM_X = (CARD_WIDTH / 2);
     private static final int CARD_BOTTOM_Y = CARD_HEIGHT / 2;
 
     /* Icons */
@@ -23,7 +20,7 @@ public class EditLayer {
     private final Button removeButton;
     private final Button editButton;
     private final Button learnedButton;
-    private static final int buttonsY = 20;
+    private static final int buttonsY = -40;
 
     private final PApplet pApplet;
     private final Card card;
@@ -37,6 +34,7 @@ public class EditLayer {
         this.activate();
         justCreated = true;
         removeButton = new Button(pApplet, pApplet.loadImage(removeButtonFilename), -50, CARD_BOTTOM_Y - buttonsY);
+        removeButton.setHoverColor(pApplet.color(255, 0, 0, 255));
         editButton = new Button(pApplet, pApplet.loadImage(editButtonFilename), 0, CARD_BOTTOM_Y - buttonsY);
         learnedButton = new Button(pApplet, pApplet.loadImage(learnedButtonFilename), 50, CARD_BOTTOM_Y - buttonsY);
     }
@@ -47,10 +45,7 @@ public class EditLayer {
         pApplet.rectMode(pApplet.CORNERS);
         pApplet.fill(255, 127);
         pApplet.noStroke();
-        /* Relative to the center of a card. */
-        pApplet.rect(CARD_LEFT_BOTTOM_X, CARD_BOTTOM_Y - (float) currentHeight.getCurrentValue(),
-                CARD_RIGHT_BOTTOM_X, CARD_BOTTOM_Y);
-        if (currentHeight.getCurrentValue() > HEIGHT_THRESHOLD) {
+        if (isActive) {
             /* Show icons */
             pApplet.translate(0, 0, 1);
             removeButton.display();
@@ -62,7 +57,7 @@ public class EditLayer {
     }
 
     public void mouseClicked() {
-        if (currentHeight.getCurrentValue() > HEIGHT_THRESHOLD) {
+        if (isActive) {
             /* Check for clicks */
             if (removeButton.isPressed()) {
                 card.getCollection().removeFocusCard();
@@ -76,12 +71,11 @@ public class EditLayer {
 
     public void activate() {
         isActive = true;
-        currentHeight.setTarget(HEIGHT);
+
     }
 
     public void deactivate() {
         isActive = false;
-        currentHeight.setTarget(0);
         if (justCreated) {
             justCreated = false;
         }
@@ -89,7 +83,7 @@ public class EditLayer {
 
     private void checkForHover() {
         if (pApplet.mouseX > pApplet.screenX(-200, 0) && pApplet.mouseX < pApplet.screenX(200, 0)
-                && pApplet.mouseY > pApplet.screenY(0, -100) && pApplet.mouseY < pApplet.screenY(0, 100)) {
+                && pApplet.mouseY > pApplet.screenY(0, 0) && pApplet.mouseY < pApplet.screenY(0, 200)) {
             activate();
         } else if (!justCreated) {
             deactivate();

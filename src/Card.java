@@ -45,7 +45,7 @@ public class Card {
         this.targetAngle = 0;
         this.xPosTarget = xPos;
 
-        yPos = -100;
+        yPos = -160;
         this.yPosTarget = yPos;
         this.side = false;
         this.isEditing = true;
