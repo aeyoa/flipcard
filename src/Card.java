@@ -1,5 +1,3 @@
-import processing.core.PApplet;
-
 /**
  * Created by arsenykogan on 25/05/14.
  */
@@ -15,8 +13,9 @@ public class Card {
     private static float STEP_EASING = 0.2f;
     private static int MAX_TEXT_WIDTH = 300;
     private static int TEXT_SIZE = 40;
+    private static int LEARNED_COLOR;
 
-    private final PApplet p;
+    private final Flipcard app;
     private CardsCollection collection;
     private float angle;
     private float targetAngle;
@@ -28,19 +27,25 @@ public class Card {
     private int currentTextSizeA;
     private int currentTextSizeB;
 
+    private float realX = 0;
+    private float realY = 0;
+    private float realZ = 0;
+
     /* Words on card sides. */
     private String sideA = "";
     private String sideB = "";
     /* sideA = false, sideB = true. */
     private Boolean side;
     private boolean isEditing;
+    private boolean isLearned;
 
-    public Card(final PApplet p, final CardsCollection collection) {
-        this.p = p;
+    public Card(final Flipcard app, final CardsCollection collection) {
+        this.app = app;
         this.collection = collection;
         /* Initialize colors. */
-        TEXT_COLOR = p.color(42, 58, 72);
-        CARD_COLOR = p.color(178, 212, 220);
+        TEXT_COLOR = app.color(42, 58, 72);
+        CARD_COLOR = app.color(178, 212, 220);
+        LEARNED_COLOR = app.color(0, 255, 0);
         this.angle = 0;
         this.targetAngle = 0;
         this.xPosTarget = xPos;
@@ -49,25 +54,31 @@ public class Card {
         this.yPosTarget = yPos;
         this.side = false;
         this.isEditing = true;
-        this.editLayer = new EditLayer(p, this);
+        this.editLayer = new EditLayer(app, this);
+        this.isLearned = false;
 
         currentTextSizeA = TEXT_SIZE;
         currentTextSizeB = TEXT_SIZE;
-        p.fill(TEXT_COLOR);
+        app.fill(TEXT_COLOR);
     }
 
-    public Card(final PApplet p, final CardsCollection collection, final String sideA, final String sideB) {
-        this(p, collection);
+    public Card(final Flipcard app, final CardsCollection collection, final String sideA, final String sideB) {
+        this(app, collection);
         this.sideA = sideA;
         this.sideB = sideB;
     }
 
     public void display() {
-        p.pushMatrix();
+        app.pushMatrix();
 
         /* Filling card with CARD_COLOR. */
-        p.fill(CARD_COLOR);
-        p.noStroke();
+        app.fill(CARD_COLOR);
+        if (isLearned) {
+            app.stroke(LEARNED_COLOR);
+            app.strokeWeight(3);
+        } else {
+            app.noStroke();
+        }
 
         /* Smoothing X position. */
         if (Math.abs(xPosTarget - xPos) >= 1) {
@@ -79,7 +90,7 @@ public class Card {
             yPos += (yPosTarget - yPos) * STEP_EASING;
         }
 
-        p.translate(xPos, yPos, 0);
+        app.translate(xPos, yPos, 0);
 
         /* Smoothing rotation angle. */
         if ((targetAngle - angle) > .01) {
@@ -87,36 +98,42 @@ public class Card {
         } else {
             angle = targetAngle;
         }
-        p.rotateY(angle);
-        p.rectMode(p.CENTER);
-        p.rect(0, 0, CARD_WIDTH, CARD_HEIGHT);
+        app.rotateY(angle);
+        app.rectMode(app.CENTER);
+        app.rect(0, 0, CARD_WIDTH, CARD_HEIGHT);
 
-        p.textAlign(p.CENTER, p.CENTER);
-        float roundAngle = angle % (p.TWO_PI);
-        if (roundAngle < p.HALF_PI || roundAngle > (p.HALF_PI + p.PI)) {
-            p.translate(0, 0, 2);
+        /* Updating info about real positions */
+        realX = app.modelX(0, 0, 0);
+        realY = app.modelY(0, 0, 0);
+        realZ = app.modelZ(0, 0, 0);
+
+
+        app.textAlign(app.CENTER, app.CENTER);
+        float roundAngle = angle % (app.TWO_PI);
+        if (roundAngle < app.HALF_PI || roundAngle > (app.HALF_PI + app.PI)) {
+            app.translate(0, 0, 2);
             /* A-side edit layer */
             editLayer.display();
             /*Translate text a bit higher. */
-            p.translate(0, -5, 0);
+            app.translate(0, -5, 0);
             drawText(sideA);
-            p.translate(0, 5, 0);
+            app.translate(0, 5, 0);
 
         } else {
-            p.translate(0, 0, -2);
-            p.rotateY(p.PI);
+            app.translate(0, 0, -2);
+            app.rotateY(app.PI);
             /* B-side edit layer */
             editLayer.display();
-            p.translate(0, -5, 0);
+            app.translate(0, -5, 0);
             drawText(sideB);
-            p.translate(0, 5, 0);
+            app.translate(0, 5, 0);
         }
 
-        p.popMatrix();
+        app.popMatrix();
     }
 
     public void turn() {
-        targetAngle += p.PI;
+        targetAngle += app.PI;
         side = !side;
     }
 
@@ -157,29 +174,29 @@ public class Card {
     }
 
     private void drawText(final String text) {
-        p.fill(TEXT_COLOR);
-        float roundAngle = angle % (p.TWO_PI);
-        if (roundAngle < p.HALF_PI || roundAngle > (p.HALF_PI + p.PI)) {
-            p.textSize(currentTextSizeA);
+        app.fill(TEXT_COLOR);
+        float roundAngle = angle % (app.TWO_PI);
+        if (roundAngle < app.HALF_PI || roundAngle > (app.HALF_PI + app.PI)) {
+            app.textSize(currentTextSizeA);
         } else {
-            p.textSize(currentTextSizeB);
+            app.textSize(currentTextSizeB);
         }
-        p.text(text, 0, 0, 0);
-        if (isEditing && (Math.abs(angle - targetAngle) < 0.05) && (p.millis() / 700 % 2 == 0)) {
-            float width = p.textWidth(text);
-            p.stroke(127);
-            p.strokeWeight(2);
-            p.line(width / 2, 20, 0, width / 2, -20, 0);
+        app.text(text, 0, 0, 0);
+        if (isEditing && (Math.abs(angle - targetAngle) < 0.05) && (app.millis() / 700 % 2 == 0)) {
+            float width = app.textWidth(text);
+            app.stroke(127);
+            app.strokeWeight(2);
+            app.line(width / 2, 20, 0, width / 2, -20, 0);
         }
     }
 
 
     public void editText(final char key) {
-        if (isEditing && key != p.CODED) {
-            if (key == p.BACKSPACE) {
+        if (isEditing && key != app.CODED) {
+            if (key == app.BACKSPACE) {
                 this.setCurrentSide(this.getCurrentSide().substring(0, Math.max(0, this.getCurrentSide().length() - 1)));
                 /* Increase text font */
-                if (p.textWidth(this.getCurrentSide() + "—-") < MAX_TEXT_WIDTH) {
+                if (app.textWidth(this.getCurrentSide() + "—-") < MAX_TEXT_WIDTH) {
                     if (side) {
                         if (currentTextSizeB < TEXT_SIZE) {
                             currentTextSizeB++;
@@ -190,13 +207,13 @@ public class Card {
                         }
                     }
                 }
-            } else if (key == p.ENTER || key == p.RETURN) {
+            } else if (key == app.ENTER || key == app.RETURN) {
                 this.turn();
             } else {
                 this.setCurrentSide(this.getCurrentSide() + key);
             }
         }
-        if (p.textWidth(this.getCurrentSide()) > MAX_TEXT_WIDTH) {
+        if (app.textWidth(this.getCurrentSide()) > MAX_TEXT_WIDTH) {
             if (side) {
                 currentTextSizeB--;
             } else {
@@ -214,11 +231,42 @@ public class Card {
         isEditing = true;
     }
 
+    public void markAsLearned() {
+        isLearned = true;
+        this.disappear();
+    }
+
+    public void markAsNew() {
+        isLearned = false;
+        this.appear();
+    }
+
+    public boolean isLearned() {
+        return isLearned;
+    }
+
     public void mouseClicked() {
         editLayer.mouseClicked();
     }
 
     public CardsCollection getCollection() {
         return collection;
+    }
+
+    public void setCollection(final CardsCollection collection) {
+        this.collection = collection;
+    }
+
+    /* Real card position for camera transform. */
+    public float getRealX() {
+        return realX;
+    }
+
+    public float getRealY() {
+        return realY;
+    }
+
+    public float getRealZ() {
+        return realZ;
     }
 }

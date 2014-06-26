@@ -1,11 +1,8 @@
 
 REFACTOR:
-_ rename and refactor structure
 _ file with constants
 
 BUTTONS:
-_ effect when pressing (add)
-_ effect when pressing (menu)
 _ (save) (shuffle) (learned) effects
 _ effects on (delete), (edit), (learned)
 
@@ -26,6 +23,8 @@ _ some effect on file d&d
 _ fix font bug when d&d card collection
 _ add initial background
 _ add (left) and (right) buttons
+_ all interface buttons to the front
+_ anti-aliasing
 
 + image cards and d&d
 + flip all feature

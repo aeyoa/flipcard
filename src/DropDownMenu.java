@@ -6,32 +6,33 @@ public class DropDownMenu {
     private static final int HIDDEN_Y_POS = -50;
     private static final int ACTIVE_Y_POS = 50;
 
-    private final Flipcard pApplet;
+    private final Flipcard app;
 
     private final EasingValue menuButtonAngle = new EasingValue(0.15, 0.01);
     private final Button menuButton;
     private boolean isActive;
 
     private final Button saveButton;
-    private final Button clearButton;
+    private final Button learnedButton;
     private final Button shuffleButton;
 
     private final EasingValue saveButtonY = new EasingValue(0.30, 1);
     private final EasingValue shuffleButtonY = new EasingValue(0.20, 1);
     private final EasingValue clearButtonY = new EasingValue(0.10, 1);
 
-    public DropDownMenu(final Flipcard pApplet) {
-        this.pApplet = pApplet;
-        this.menuButton = new Button(pApplet, pApplet.loadImage("menu.png"), 750, ACTIVE_Y_POS);
+    public DropDownMenu(final Flipcard app) {
+        this.app = app;
+        this.menuButton = new Button(app, app.loadImage("menu.png"), 750, ACTIVE_Y_POS);
         isActive = false;
 
         this.saveButtonY.setTarget(HIDDEN_Y_POS);
         this.shuffleButtonY.setTarget(HIDDEN_Y_POS);
         this.clearButtonY.setTarget(HIDDEN_Y_POS);
 
-        this.saveButton = new Button(pApplet, pApplet.loadImage("save.png"), 700, (int) saveButtonY.getCurrentValue());
-        this.shuffleButton = new Button(pApplet, pApplet.loadImage("shuffle.png"), 630, (int) shuffleButtonY.getCurrentValue());
-        this.clearButton = new Button(pApplet, pApplet.loadImage("show-learned.png"), 525, (int) clearButtonY.getCurrentValue());
+        this.saveButton = new Button(app, app.loadImage("save.png"), 690, (int) saveButtonY.getCurrentValue());
+        this.shuffleButton = new Button(app, app.loadImage("shuffle.png"), 610, (int) shuffleButtonY.getCurrentValue());
+        this.learnedButton = new Button(app, app.loadImage("show-learned.png"), 515, (int) clearButtonY.getCurrentValue());
+        this.learnedButton.makeToggle(app.loadImage("show-new.png"));
     }
 
     public void display() {
@@ -41,10 +42,10 @@ public class DropDownMenu {
         clearButtonY.update();
         saveButton.setY((int) saveButtonY.getCurrentValue());
         shuffleButton.setY((int) shuffleButtonY.getCurrentValue());
-        clearButton.setY((int) clearButtonY.getCurrentValue());
+        learnedButton.setY((int) clearButtonY.getCurrentValue());
         saveButton.display();
         shuffleButton.display();
-        clearButton.display();
+        learnedButton.display();
         menuButton.display((float) menuButtonAngle.getCurrentValue());
     }
 
@@ -57,7 +58,18 @@ public class DropDownMenu {
             }
         }
         if (saveButton.isPressed()) {
-            pApplet.saveToJSON();
+            app.saveToJSON();
+        }
+        if (learnedButton.isPressed()) {
+            /* Important: isToggled represents current state (this frame) of the button! */
+            if (learnedButton.isToggled()) {
+                app.focusToLearned();
+            } else {
+                app.focusToNew();
+            }
+        }
+        if (shuffleButton.isPressed()) {
+            app.getCardsCollection().shuffleCards();
         }
     }
 
@@ -67,7 +79,7 @@ public class DropDownMenu {
         clearButtonY.setTarget(ACTIVE_Y_POS);
 
         isActive = true;
-        menuButtonAngle.setTarget(-pApplet.HALF_PI);
+        menuButtonAngle.setTarget(-app.HALF_PI);
     }
 
     private void deactivate() {

@@ -21,11 +21,14 @@ public class Flipcard extends PApplet {
     private SDrop drop;
     private PImage addIcon;
     private CardsCollection cards;
+    private CardsCollection learnedCards;
+    private Camera camera;
+    private Background background;
 
     /* Buttons */
     private Button button;
-    private final ButtonArea goLeftButton = new ButtonArea(this, 0, 0, 200, 400);
-    private final ButtonArea goRightButton = new ButtonArea(this, 600, 0, 800, 400);
+    private final ButtonArea goLeftButton = new ButtonArea(this, 0, 100, 200, 400);
+    private final ButtonArea goRightButton = new ButtonArea(this, 600, 100, 800, 400);
     private final Button jumpButton = new Button(this, loadImage("jump.png"), 750, 200);
     private DropDownMenu menu;
 
@@ -57,19 +60,32 @@ public class Flipcard extends PApplet {
         });
         addIcon = loadImage("add.png");
         button = new Button(this, addIcon, 400, 50);
+        camera = new Camera(this);
+        background = new Background(this);
 
         cards = new CardsCollection(this);
+        learnedCards = new CardsCollection(this);
         menu = new DropDownMenu(this);
-
-        /*float fov = (PI / 14);
-        float cameraZ = (float) (height / 2.0) / tan(fov / 2);
-        perspective(fov, (float) width / height, cameraZ / 10, cameraZ * 10);*/
     }
 
     @Override
     public void draw() {
         background(color(255, 255, 255));
+        background.display();
+
+//        camera.transform();
+
+        /* Card gets removed !!! */
+
         cards.display();
+        pushMatrix();
+        translate(0, 1000, 0);
+//        rotateY(PI);
+        learnedCards.display();
+        popMatrix();
+
+//        camera.setToDefault();
+
         button.display();
         menu.display();
         jumpButton.display();
@@ -107,13 +123,23 @@ public class Flipcard extends PApplet {
     }
 
     public void saveToJSONCallback(final File selectedFile) {
-        try {
-            final FileWriter fw = new FileWriter(selectedFile.getAbsolutePath() + ".cards");
-            gson.toJson(cards.getCardsCollectionExport(), fw);
-            fw.close();
-        } catch (IOException e) {
-            e.printStackTrace();
+        if (selectedFile != null) {
+            try {
+                final FileWriter fw = new FileWriter(selectedFile.getAbsolutePath() + ".cards");
+                gson.toJson(cards.getCardsCollectionExport(), fw);
+                fw.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
+    }
+
+    public void focusToLearned() {
+        camera.focusToLearned();
+    }
+
+    public void focusToNew() {
+        camera.focusToNew();
     }
 
     public void saveToJSON() {
@@ -131,5 +157,11 @@ public class Flipcard extends PApplet {
         }
     }
 
+    public CardsCollection getCardsCollection() {
+        return cards;
+    }
 
+    public CardsCollection getLearnedCardsCollection() {
+        return learnedCards;
+    }
 }

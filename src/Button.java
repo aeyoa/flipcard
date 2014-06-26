@@ -107,4 +107,8 @@ public class Button {
     public void setY(final int yPos) {
         this.yPos = yPos;
     }
+
+    public boolean isToggled() {
+        return toggled;
+    }
 }

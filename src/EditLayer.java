@@ -22,36 +22,36 @@ public class EditLayer {
     private final Button learnedButton;
     private static final int buttonsY = -40;
 
-    private final PApplet pApplet;
+    private final Flipcard app;
     private final Card card;
     private boolean isActive = false;
     private EasingValue currentHeight = new EasingValue(EASING, DELTA);
     private boolean justCreated;
 
-    public EditLayer(final PApplet pApplet, final Card card) {
-        this.pApplet = pApplet;
+    public EditLayer(final Flipcard app, final Card card) {
+        this.app = app;
         this.card = card;
         this.activate();
         justCreated = true;
-        removeButton = new Button(pApplet, pApplet.loadImage(removeButtonFilename), -50, CARD_BOTTOM_Y - buttonsY);
-        removeButton.setHoverColor(pApplet.color(255, 0, 0, 255));
-        editButton = new Button(pApplet, pApplet.loadImage(editButtonFilename), 0, CARD_BOTTOM_Y - buttonsY);
-        learnedButton = new Button(pApplet, pApplet.loadImage(learnedButtonFilename), 50, CARD_BOTTOM_Y - buttonsY);
+        removeButton = new Button(app, app.loadImage(removeButtonFilename), -50, CARD_BOTTOM_Y - buttonsY);
+        removeButton.setHoverColor(app.color(255, 0, 0, 255));
+        editButton = new Button(app, app.loadImage(editButtonFilename), 0, CARD_BOTTOM_Y - buttonsY);
+        learnedButton = new Button(app, app.loadImage(learnedButtonFilename), 50, CARD_BOTTOM_Y - buttonsY);
     }
 
     public void display() {
         checkForHover();
         currentHeight.update();
-        pApplet.rectMode(pApplet.CORNERS);
-        pApplet.fill(255, 127);
-        pApplet.noStroke();
+        app.rectMode(app.CORNERS);
+        app.fill(255, 127);
+        app.noStroke();
         if (isActive) {
             /* Show icons */
-            pApplet.translate(0, 0, 1);
+            app.translate(0, 0, 1);
             removeButton.display();
             editButton.display();
             learnedButton.display();
-            pApplet.translate(0, 0, -1);
+            app.translate(0, 0, -1);
         }
 
     }
@@ -64,6 +64,9 @@ public class EditLayer {
             }
             if (editButton.isPressed()) {
                 card.startEditing();
+            }
+            if (learnedButton.isPressed()) {
+                app.getCardsCollection().markFocusCardAsLearned();
             }
         }
     }
@@ -82,8 +85,8 @@ public class EditLayer {
     }
 
     private void checkForHover() {
-        if (pApplet.mouseX > pApplet.screenX(-200, 0) && pApplet.mouseX < pApplet.screenX(200, 0)
-                && pApplet.mouseY > pApplet.screenY(0, 0) && pApplet.mouseY < pApplet.screenY(0, 200)) {
+        if (app.mouseX > app.screenX(-200, 0) && app.mouseX < app.screenX(200, 0)
+                && app.mouseY > app.screenY(0, 0) && app.mouseY < app.screenY(0, 200)) {
             activate();
         } else if (!justCreated) {
             deactivate();
