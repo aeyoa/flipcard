@@ -66,6 +66,7 @@ public class Card {
         this(app, collection);
         this.sideA = sideA;
         this.sideB = sideB;
+        this.fitTextToCard();
     }
 
     public void display() {
@@ -196,7 +197,12 @@ public class Card {
             if (key == app.BACKSPACE) {
                 this.setCurrentSide(this.getCurrentSide().substring(0, Math.max(0, this.getCurrentSide().length() - 1)));
                 /* Increase text font */
-                if (app.textWidth(this.getCurrentSide() + "—-") < MAX_TEXT_WIDTH) {
+                if (side) {
+                    app.textSize(currentTextSizeB);
+                } else {
+                    app.textSize(currentTextSizeA);
+                }
+                if (app.textWidth(this.getCurrentSide() + "_") < MAX_TEXT_WIDTH) {
                     if (side) {
                         if (currentTextSizeB < TEXT_SIZE) {
                             currentTextSizeB++;
@@ -220,6 +226,25 @@ public class Card {
                 currentTextSizeA--;
             }
         }
+    }
+
+    private void fitTextToCard() {
+        while (app.textWidth(this.getSideA()) > MAX_TEXT_WIDTH) {
+            currentTextSizeA--;
+            app.textSize(currentTextSizeA);
+        }
+        while (app.textWidth(this.getSideB()) > MAX_TEXT_WIDTH) {
+            currentTextSizeB--;
+            app.textSize(currentTextSizeB);
+        }
+    }
+
+    public boolean flipToA() {
+        if (side) {
+            this.turn();
+            return true;
+        }
+        return false;
     }
 
     public void endEditing() {

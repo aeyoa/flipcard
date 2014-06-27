@@ -1,3 +1,5 @@
+import apple.laf.JRSUIConstants;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -237,6 +239,34 @@ public class CardsCollection {
             cards = shuffledCards;
             focusCard = cards.get(focusIndex);
         }
+    }
+
+    public void flipAllToA() {
+        boolean wasFlipped = false;
+        for (Card card : cards) {
+            wasFlipped = card.flipToA() || wasFlipped;
+        }
+        if (!wasFlipped) {
+            for (Card card : cards) {
+                card.turn();
+            }
+        }
+    }
+
+    public boolean isEmpty() {
+        return cards.isEmpty();
+    }
+
+    public boolean isLastCard() {
+        /* If focusCard is not last. */
+        if (focusIndex == cards.size() - 1) {
+            return true;
+        }
+        return false;
+    }
+
+    public int getCount() {
+        return cards.size();
     }
 
 

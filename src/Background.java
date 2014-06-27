@@ -1,3 +1,4 @@
+import processing.core.PApplet;
 import processing.core.PImage;
 
 /**
@@ -7,9 +8,9 @@ public class Background {
 
     private final String filename = "background.png";
 
-    private final Flipcard app;
+    private final PApplet app;
     private final PImage background;
-    private final EasingValue alpha = new EasingValue(0.1, 0.1);
+    private final EasingValue alpha = new EasingValue(0.2, 0.1);
 
     public Background(final Flipcard app) {
         this.app = app;
@@ -19,10 +20,13 @@ public class Background {
 
     public void display() {
         alpha.update();
-        app.tint(255, (float) alpha.getCurrentValue());
-        app.imageMode(app.CORNER);
-        app.image(background, 0, -4);
-        app.noTint();
+        if (alpha.getCurrentValue() > 2) {
+            app.tint(255, (float) alpha.getCurrentValue());
+            app.imageMode(app.CORNER);
+            app.image(background, 0, -4);
+            app.noTint();
+        }
+
     }
 
     public void hide() {

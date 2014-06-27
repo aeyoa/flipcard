@@ -8,7 +8,6 @@ _ effects on (delete), (edit), (learned)
 
 _ show (toStart) only when needed
 _ right animation in menu items
-_ fix nullPointer when pressing cancel after save
 _ right spaces between menu items
 _ animation after saving
 _ move edit panel below card
@@ -20,7 +19,6 @@ _ fix A/B side bug
 _ add min font size and max string length
 _ fix (left) and (right) areas
 _ some effect on file d&d
-_ fix font bug when d&d card collection
 _ add initial background
 _ add (left) and (right) buttons
 _ all interface buttons to the front
@@ -38,5 +36,7 @@ _ anti-aliasing
 + can't create feature when empty card on screen
 + associate file extension with app and icon
 
+X fix font bug when d&d card collection
 X change pApplet to Flipcard
 X add delay after card creation before edit layer appears
+X fix nullPointer when pressing cancel after save

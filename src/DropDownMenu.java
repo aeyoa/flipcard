@@ -31,8 +31,7 @@ public class DropDownMenu {
 
         this.saveButton = new Button(app, app.loadImage("save.png"), 690, (int) saveButtonY.getCurrentValue());
         this.shuffleButton = new Button(app, app.loadImage("shuffle.png"), 610, (int) shuffleButtonY.getCurrentValue());
-        this.learnedButton = new Button(app, app.loadImage("show-learned.png"), 515, (int) clearButtonY.getCurrentValue());
-        this.learnedButton.makeToggle(app.loadImage("show-new.png"));
+        this.learnedButton = new Button(app, app.loadImage("flip-all.png"), 520, (int) clearButtonY.getCurrentValue());
     }
 
     public void display() {
@@ -61,12 +60,13 @@ public class DropDownMenu {
             app.saveToJSON();
         }
         if (learnedButton.isPressed()) {
-            /* Important: isToggled represents current state (this frame) of the button! */
+            /* Important: isToggled represents current state (this frame) of the button! *//*
             if (learnedButton.isToggled()) {
                 app.focusToLearned();
             } else {
                 app.focusToNew();
-            }
+            }*/
+            app.getCardsCollection().flipAllToA();
         }
         if (shuffleButton.isPressed()) {
             app.getCardsCollection().shuffleCards();

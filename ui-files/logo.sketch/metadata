@@ -9,11 +9,9 @@
 	<key>commit</key>
 	<string>a6af16d03e62e9b34da1be1098affa7b56d9838b</string>
 	<key>fonts</key>
-	<array>
-		<string>Helvetica-Bold</string>
-	</array>
+	<array/>
 	<key>length</key>
-	<integer>150861</integer>
+	<integer>17525</integer>
 	<key>version</key>
 	<integer>37</integer>
 </dict>

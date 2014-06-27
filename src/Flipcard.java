@@ -29,6 +29,7 @@ public class Flipcard extends PApplet {
     private Button button;
     private final ButtonArea goLeftButton = new ButtonArea(this, 0, 100, 200, 400);
     private final ButtonArea goRightButton = new ButtonArea(this, 600, 100, 800, 400);
+    private final ButtonArea flipArea = new ButtonArea(this, 200, 100, 600, 300);
     private final Button jumpButton = new Button(this, loadImage("jump.png"), 750, 200);
     private DropDownMenu menu;
 
@@ -71,6 +72,11 @@ public class Flipcard extends PApplet {
     @Override
     public void draw() {
         background(color(255, 255, 255));
+        if (cards.isEmpty()) {
+            background.show();
+        } else {
+            background.hide();
+        }
         background.display();
 
 //        camera.transform();
@@ -88,7 +94,9 @@ public class Flipcard extends PApplet {
 
         button.display();
         menu.display();
-        jumpButton.display();
+        if (cards.isLastCard() && cards.getCount() > 2) {
+            jumpButton.display();
+        }
     }
 
     @Override
@@ -101,6 +109,12 @@ public class Flipcard extends PApplet {
         }
         if (goRightButton.isPressed()) {
             cards.moveFocusRight();
+        }
+        if (flipArea.isPressed()) {
+            cards.flipFocusCard();
+        }
+        if (jumpButton.isPressed() && cards.isLastCard() && cards.getCount() > 2) {
+            cards.moveToFirstCard();
         }
         cards.mouseClicked();
         menu.mouseClicked();

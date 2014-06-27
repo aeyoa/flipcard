@@ -9,21 +9,17 @@ public class Main extends PApplet {
 
     @Override
     public void setup() {
-        size(100, 100);
+        size(400, 400, P3D);
         rectMode(CENTER);
-        rect(250, 250, 200, 200);
         image(loadImage("moonwalk.jpg"), 0, 0);
+        textFont(createFont("Helvetica-Bold", 30));
     }
 
     @Override
     public void draw() {
-        centerWindow();
+        text("hello", 100, 100);
+        fill(127);
+
     }
 
-    void centerWindow() {
-        if (frame != null && !centered) {
-            frame.setLocation(displayWidth / 2 - width / 2, displayHeight / 2 - height / 2);
-            centered = true;
-        }
-    }
 }
