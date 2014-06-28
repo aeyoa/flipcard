@@ -24,6 +24,8 @@ public class Flipcard extends PApplet {
     private CardsCollection learnedCards;
     private Camera camera;
     private Background background;
+    private DragAndDropPopUp dragAndDropPopUp = new DragAndDropPopUp(this);
+    private SavedPopUp savedPopUp = new SavedPopUp(this);
 
     /* Buttons */
     private Button button;
@@ -35,7 +37,6 @@ public class Flipcard extends PApplet {
 
     @Override
     public void setup() {
-        System.out.println("hello");
         size(800, 400, P3D);
         textFont(createFont("Helvetica-Bold", 30));
         noStroke();
@@ -47,7 +48,8 @@ public class Flipcard extends PApplet {
         drop.addDropListener(new DropListener() {
 
             {
-                setTargetRect(0, 0, width, height);
+                int w = 10;
+                setTargetRect(w, w, width - w, height - w);
             }
 
             @Override
@@ -57,8 +59,15 @@ public class Flipcard extends PApplet {
 
             @Override
             public void dropEnter() {
-                System.out.println("hello");
+                dragAndDropPopUp.show();
             }
+
+            @Override
+            public void dropLeave() {
+                dragAndDropPopUp.hide();
+            }
+
+
         });
         addIcon = loadImage("add.png");
         button = new Button(this, addIcon, 400, 50);
@@ -85,6 +94,8 @@ public class Flipcard extends PApplet {
         if (cards.isLastCard() && cards.getCount() > 2) {
             jumpButton.display();
         }
+        dragAndDropPopUp.display();
+        savedPopUp.display();
     }
 
     @Override
@@ -134,6 +145,7 @@ public class Flipcard extends PApplet {
                 final FileWriter fw = new FileWriter(selectedFile.getAbsolutePath() + ".cards");
                 gson.toJson(cards.getCardsCollectionExport(), fw);
                 fw.close();
+                savedPopUp.show();
             } catch (IOException e) {
                 e.printStackTrace();
             }

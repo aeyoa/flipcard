@@ -1,7 +1,4 @@
 
-REFACTOR:
-_ file with constants
-
 BUTTONS:
 _ (save) (shuffle) (learned) effects
 _ effects on (delete), (edit), (learned)
@@ -13,7 +10,6 @@ _ implement 'learned cards'
 _ changing size of cursor
 _ fix A/B side bug
 _ add min font size and max string length
-_ some effect on file d&d
 _ add (left) and (right) buttons
 _ anti-aliasing
 
@@ -30,6 +26,7 @@ _ anti-aliasing
 + associate file extension with app and icon
 
 
+X some effect on file d&d
 X all interface buttons to the front
 X add initial background
 X stop edit on [esc]
