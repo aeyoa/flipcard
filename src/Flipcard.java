@@ -35,6 +35,7 @@ public class Flipcard extends PApplet {
 
     @Override
     public void setup() {
+        System.out.println("hello");
         size(800, 400, P3D);
         textFont(createFont("Helvetica-Bold", 30));
         noStroke();
@@ -78,20 +79,7 @@ public class Flipcard extends PApplet {
             background.hide();
         }
         background.display();
-
-//        camera.transform();
-
-        /* Card gets removed !!! */
-
         cards.display();
-        pushMatrix();
-        translate(0, 1000, 0);
-//        rotateY(PI);
-        learnedCards.display();
-        popMatrix();
-
-//        camera.setToDefault();
-
         button.display();
         menu.display();
         if (cards.isLastCard() && cards.getCount() > 2) {
@@ -122,6 +110,10 @@ public class Flipcard extends PApplet {
 
     @Override
     public void keyPressed() {
+        if (key == ESC) {
+            key = 0;
+            cards.endEditingOfFocusCard();
+        }
         cards.editFocusCard(key);
         if (key == CODED) {
             if (keyCode == RIGHT) {

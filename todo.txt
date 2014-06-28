@@ -8,20 +8,13 @@ _ effects on (delete), (edit), (learned)
 
 _ show (toStart) only when needed
 _ right animation in menu items
-_ right spaces between menu items
 _ animation after saving
-_ move edit panel below card
 _ implement 'learned cards'
 _ changing size of cursor
-_ card rotation on click
-_ stop edit on [esc]
 _ fix A/B side bug
 _ add min font size and max string length
-_ fix (left) and (right) areas
 _ some effect on file d&d
-_ add initial background
 _ add (left) and (right) buttons
-_ all interface buttons to the front
 _ anti-aliasing
 
 + image cards and d&d
@@ -36,6 +29,14 @@ _ anti-aliasing
 + can't create feature when empty card on screen
 + associate file extension with app and icon
 
+
+X all interface buttons to the front
+X add initial background
+X stop edit on [esc]
+X fix (left) and (right) areas
+X card rotation on click
+X move edit panel below card
+X right spaces between menu items
 X fix font bug when d&d card collection
 X change pApplet to Flipcard
 X add delay after card creation before edit layer appears

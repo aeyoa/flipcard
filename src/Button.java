@@ -31,8 +31,8 @@ public class Button {
         this.yPos = yPos;
 
         /* Default and hover opacity */
-        defaultColor = pApplet.color(0, (float) (255 * 0.2));
-        hoverColor = pApplet.color(0, (float) (255 * 0.3));
+        defaultColor = pApplet.color(0, (float) (255 * 0.5));
+        hoverColor = pApplet.color(0, (float) (255 * 0.8));
 
         /* For toggle button */
         this.isToggleButton = false;

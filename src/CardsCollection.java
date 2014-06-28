@@ -269,6 +269,12 @@ public class CardsCollection {
         return cards.size();
     }
 
+    public void endEditingOfFocusCard() {
+        if (focusCard != null) {
+            focusCard.endEditing();
+        }
+    }
+
 
     public void mouseClicked() {
         if (focusCard != null) {

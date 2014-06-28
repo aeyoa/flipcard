@@ -1,4 +1,0 @@
-Manifest-Version: 1.0
-Class-Path: /Users/arsenykogan/Documents/github/flipcard/Java
-Main-Class: MainLauncher
-

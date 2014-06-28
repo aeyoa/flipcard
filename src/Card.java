@@ -44,7 +44,7 @@ public class Card {
         this.collection = collection;
         /* Initialize colors. */
         TEXT_COLOR = app.color(42, 58, 72);
-        CARD_COLOR = app.color(178, 212, 220);
+        CARD_COLOR = app.color(96, 212, 242);
         LEARNED_COLOR = app.color(0, 255, 0);
         this.angle = 0;
         this.targetAngle = 0;
