@@ -10,10 +10,7 @@ import java.io.*;
 
 /**
  * Created by arsenykogan on 24/05/14.
- * <p/>
- * TODO: shuffle / unsuffle
- * TODO: rounded scroll
- * TODO: learned collection
+ *
  */
 public class Flipcard extends PApplet {
 
