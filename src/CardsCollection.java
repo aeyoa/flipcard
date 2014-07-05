@@ -11,6 +11,7 @@ public class CardsCollection {
 
     private final Flipcard app;
     private ArrayList<Card> cards;
+    private ArrayList<Card> learnedCards;
     private Card focusCard;
     private int focusIndex;
     private static final long NEW_CARD_DELAY = 130;
@@ -203,9 +204,10 @@ public class CardsCollection {
 
     public void markFocusCardAsLearned() {
         focusCard.markAsLearned();
-        /* Change the collection of learned card to learned-collection */
+        /* Change the collection of learned card to learned-collection *//*
         focusCard.setCollection(app.getLearnedCardsCollection());
-        app.getLearnedCardsCollection().addCard(focusCard);
+        app.getLearnedCardsCollection().addCard(focusCard);*/
+        learnedCards.add(focusCard);
         this.removeFocusCard();
     }
 
@@ -288,17 +290,20 @@ public class CardsCollection {
 
     /* Wrapper to cards collection for JSON export. */
     public CardsCollectionExport getCardsCollectionExport() {
-        return new CardsCollectionExport(cards);
+        return new CardsCollectionExport(cards, learnedCards);
     }
 
     public class CardsCollectionExport {
 
         private CardWrapper[] cardWrappers;
 
-        public CardsCollectionExport(final List<Card> cards) {
-            cardWrappers = new CardWrapper[cards.size()];
+        public CardsCollectionExport(final List<Card> cards, final List<Card> learnedCards) {
+            cardWrappers = new CardWrapper[cards.size() + learnedCards.size()];
             for (int i = 0; i < cards.size(); i++) {
                 cardWrappers[i] = new CardWrapper(cards.get(i).getSideA(), cards.get(i).getSideB());
+            }
+            for (int i = cards.size(); i < cards.size() + learnedCards.size(); i++) {
+                cardWrappers[i] = new CardWrapper(learnedCards.get(i).getSideA(), learnedCards.get(i).getSideB());
             }
         }
 
@@ -307,9 +312,9 @@ public class CardsCollection {
             private final String sideA;
             private final String sideB;
 
-            private CardWrapper(final String sideB, final String sideA) {
-                this.sideB = sideB;
+            private CardWrapper(final String sideA, final String sideB) {
                 this.sideA = sideA;
+                this.sideB = sideB;
             }
 
             public String getSideA() {
