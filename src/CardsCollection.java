@@ -1,5 +1,3 @@
-import apple.laf.JRSUIConstants;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -20,6 +18,7 @@ public class CardsCollection {
     public CardsCollection(final Flipcard pApplet) {
         this.app = pApplet;
         cards = new ArrayList<>();
+        learnedCards = new ArrayList<>();
         focusCard = null;
         focusIndex = -1;
     }
@@ -28,6 +27,7 @@ public class CardsCollection {
     public CardsCollection(final Flipcard app, final CardsCollectionExport export) {
         this.app = app;
         cards = new ArrayList<>();
+        learnedCards = new ArrayList<>();
         int i = 0;
         for (CardsCollectionExport.CardWrapper cardWrapper : export.cardWrappers) {
             final Card newCard = new Card(app, this, cardWrapper.getSideA(), cardWrapper.getSideB());
@@ -231,11 +231,11 @@ public class CardsCollection {
                 shuffledCards.add(cards.get(positions.get(i)));
                 int shift = i - positions.get(i);
                 for (int j = 0; j < Math.abs(shift); j++) {
-                     if (shift > 0) {
-                         shuffledCards.get(i).moveRight();
-                     } else {
-                         shuffledCards.get(i).moveLeft();
-                     }
+                    if (shift > 0) {
+                        shuffledCards.get(i).moveRight();
+                    } else {
+                        shuffledCards.get(i).moveLeft();
+                    }
                 }
             }
             cards = shuffledCards;
@@ -302,8 +302,8 @@ public class CardsCollection {
             for (int i = 0; i < cards.size(); i++) {
                 cardWrappers[i] = new CardWrapper(cards.get(i).getSideA(), cards.get(i).getSideB());
             }
-            for (int i = cards.size(); i < cards.size() + learnedCards.size(); i++) {
-                cardWrappers[i] = new CardWrapper(learnedCards.get(i).getSideA(), learnedCards.get(i).getSideB());
+            for (int i = 0; i < learnedCards.size(); i++) {
+                cardWrappers[i + cards.size()] = new CardWrapper(learnedCards.get(i).getSideA(), learnedCards.get(i).getSideB());
             }
         }
 
