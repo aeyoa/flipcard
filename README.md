@@ -4,6 +4,10 @@ Flipcard
 Flipcard — is a simple app that helps you to learn new foreign words.
 Just write the new word on the one side and its translation on the other, add a few more words and flip them for a couple of minutes trying to memorize them. Great!
 
+
+![alt tag](https://raw.githubusercontent.com/aeyoa/flipcard/master/ui-files/download.png)
+
+
 There are just a few features in the Flipcard.
 
 1. You can easily create new cards 
