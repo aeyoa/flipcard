@@ -3,9 +3,6 @@ BUTTONS:
 _ (save) (shuffle) (learned) effects
 _ effects on (delete), (edit), (learned)
 
-_ show (toStart) only when needed
-_ right animation in menu items
-_ animation after saving
 _ implement 'learned cards'
 _ changing size of cursor
 _ fix A/B side bug
@@ -26,7 +23,10 @@ _ anti-aliasing
 + associate file extension with app and icon
 
 
+X animation after saving
+X right animation in menu items
 X some effect on file d&d
+X show (toStart) only when needed
 X all interface buttons to the front
 X add initial background
 X stop edit on [esc]

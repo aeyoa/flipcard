@@ -17,6 +17,10 @@ public class EasingValue {
         this.target = target;
     }
 
+    public void setEasing(final double easing) {
+        this.easing = easing;
+    }
+
     public double getCurrentValue() {
         return currentValue;
     }

@@ -6,6 +6,10 @@ public class DropDownMenu {
     private static final int HIDDEN_Y_POS = -50;
     private static final int ACTIVE_Y_POS = 50;
 
+    private static final double fastEasing = 0.3;
+    private static final double midEasing = 0.2;
+    private static final double slowEasing = 0.1;
+
     private final Flipcard app;
 
     private final EasingValue menuButtonAngle = new EasingValue(0.15, 0.01);
@@ -16,9 +20,9 @@ public class DropDownMenu {
     private final Button learnedButton;
     private final Button shuffleButton;
 
-    private final EasingValue saveButtonY = new EasingValue(0.30, 1);
-    private final EasingValue shuffleButtonY = new EasingValue(0.20, 1);
-    private final EasingValue clearButtonY = new EasingValue(0.10, 1);
+    private final EasingValue saveButtonY = new EasingValue(fastEasing, 1);
+    private final EasingValue shuffleButtonY = new EasingValue(midEasing, 1);
+    private final EasingValue clearButtonY = new EasingValue(slowEasing, 1);
 
     public DropDownMenu(final Flipcard app) {
         this.app = app;
@@ -74,6 +78,10 @@ public class DropDownMenu {
     }
 
     private void activate() {
+
+        saveButtonY.setEasing(fastEasing);
+        clearButtonY.setEasing(slowEasing);
+
         saveButtonY.setTarget(ACTIVE_Y_POS);
         shuffleButtonY.setTarget(ACTIVE_Y_POS);
         clearButtonY.setTarget(ACTIVE_Y_POS);
@@ -83,6 +91,10 @@ public class DropDownMenu {
     }
 
     private void deactivate() {
+
+        saveButtonY.setEasing(slowEasing);
+        clearButtonY.setEasing(fastEasing);
+
         saveButtonY.setTarget(HIDDEN_Y_POS);
         shuffleButtonY.setTarget(HIDDEN_Y_POS);
         clearButtonY.setTarget(HIDDEN_Y_POS);
