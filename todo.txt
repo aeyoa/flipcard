@@ -4,8 +4,6 @@ _ (save) (shuffle) (learned) effects
 _ effects on (delete), (edit), (learned)
 
 _ implement 'learned cards'
-_ changing size of cursor
-_ fix A/B side bug
 _ add min font size and max string length
 _ add (left) and (right) buttons
 _ anti-aliasing
@@ -23,6 +21,8 @@ _ anti-aliasing
 + associate file extension with app and icon
 
 
+X changing size of cursor
+X fix A/B side bug
 X animation after saving
 X right animation in menu items
 X some effect on file d&d

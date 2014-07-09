@@ -187,7 +187,9 @@ public class Card {
             float width = app.textWidth(text);
             app.stroke(127);
             app.strokeWeight(2);
-            app.line(width / 2, 20, 0, width / 2, -20, 0);
+            int cursorHeight = (roundAngle < app.HALF_PI || roundAngle > (app.HALF_PI + app.PI)) ? currentTextSizeA / 2 : currentTextSizeB / 2;
+            cursorHeight += 2;
+            app.line(width / 2, cursorHeight, 0, width / 2, -cursorHeight, 0);
         }
     }
 
